@@ -5,6 +5,27 @@ import 'vuetify/styles'
 // Vuetify
 import { createVuetify } from 'vuetify'
 
-export default createVuetify(
-  // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-)
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+export default createVuetify({
+  defaults: {
+    VTextField: {
+      variant: 'outlined',
+      density: 'compact',
+      color: '#26a69a'
+    },
+    VCheckbox: {
+      density: 'compact',
+      color: '#26a69a'
+    },
+    VBtn: {
+      color: '#26a69a'
+    },
+    VTextarea: {
+      variant: 'outlined',
+      density: 'compact',
+      color: '#26a69a'
+    }
+  }
+})

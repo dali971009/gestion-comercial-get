@@ -6,10 +6,6 @@
   </v-app>
 </template>
 
-<script lang="ts"></script>
+<script setup lang="ts"></script>
 
-<style>
-.v-btn {
-  color: white;
-}
-</style>
+<style scoped></style>
