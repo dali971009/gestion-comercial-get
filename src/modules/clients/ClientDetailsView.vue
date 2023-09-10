@@ -1,8 +1,8 @@
 <template>
   <page-view title="Añadir cliente" :use-card="false">
     <template #actions>
-      <v-btn class="text-subtitle-1" style="color: white;" @click="handleSave" rounded>
-        <v-icon icon="mdi-check" class="mr-2"/>
+      <v-btn class="text-subtitle-1" style="color: white" @click="handleSave" rounded>
+        <v-icon icon="mdi-check" class="mr-2" />
         Guardar
       </v-btn>
     </template>
@@ -29,28 +29,27 @@
 </template>
 
 <script setup lang="ts">
+import PageView from '@/components/PageView.vue'
+import CustomLabeledContainer from '@/components/CustomLabeledContainer.vue'
+import { useBreadCrumb } from '@/stores/breadcrumb'
+import { onMounted, ref } from 'vue'
+import { RouteNames } from '@/router/route-names'
+import { useRoute } from 'vue-router'
+import type { Client } from '@/models/client'
+import { useClientsStore } from '@/stores/clients'
+import router from '@/router'
+import { ClientTab } from '@/modules/clients/tabs'
+import ClientGeneralForm from '@/modules/clients/forms/ClientGeneralForm.vue'
+import ClientContactsForm from '@/modules/clients/forms/ClientContactsForm.vue'
+import ClientBankForm from '@/modules/clients/forms/ClientBankForm.vue'
 
-import PageView from "@/components/PageView.vue";
-import CustomLabeledContainer from "@/components/CustomLabeledContainer.vue";
-import {useBreadCrumb} from "@/stores/breadcrumb";
-import {onMounted, ref} from "vue";
-import {RouteNames} from "@/router/route-names";
-import {useRoute} from "vue-router";
-import type {Client} from "@/models/client";
-import {useClientsStore} from "@/stores/clients";
-import router from "@/router";
-import {ClientTab} from "@/modules/clients/tabs";
-import ClientGeneralForm from "@/modules/clients/forms/ClientGeneralForm.vue";
-import ClientContactsForm from "@/modules/clients/forms/ClientContactsForm.vue";
-import ClientBankForm from "@/modules/clients/forms/ClientBankForm.vue";
+const breadcrumb = useBreadCrumb()
+const route = useRoute()
+const clientsStore = useClientsStore()
 
-const breadcrumb = useBreadCrumb();
-const route = useRoute();
-const clientsStore = useClientsStore();
+const selectedTab = ref<ClientTab>(ClientTab.GENERAL)
 
-const selectedTab = ref<ClientTab>(ClientTab.GENERAL);
-
-const edit = route.name === RouteNames.CLIENT_EDIT;
+const edit = route.name === RouteNames.CLIENT_EDIT
 const clientCode = parseInt(route.params.client_code?.toString() ?? '')
 
 const client = ref<Client>({
@@ -58,38 +57,36 @@ const client = ref<Client>({
     executiveStaff: {
       director: {},
       economic: {},
-      it: {},
+      it: {}
     },
-    authorizedPeople: [],
+    authorizedPeople: []
   },
   bankData: {}
-});
+})
 
 function loadClient() {
-  client.value = clientsStore.loadClient(clientCode);
+  client.value = clientsStore.loadClient(clientCode)
 }
 
 function handleSave() {
   if (edit) {
-    clientsStore.updateClient(clientCode, client.value);
+    clientsStore.updateClient(clientCode, client.value)
   } else {
-    clientsStore.addClient(client.value);
+    clientsStore.addClient(client.value)
   }
-  router.push({name : RouteNames.CLIENT_LIST});
+  router.push({ name: RouteNames.CLIENT_LIST })
 }
 
 onMounted(() => {
   if (edit) {
-    loadClient();
+    loadClient()
   }
   breadcrumb.set({
     back: { name: RouteNames.CLIENT_LIST },
     backLabel: 'Clientes',
-    title: edit ? 'Editar cliente' : 'Añadir cliente',
+    title: edit ? 'Editar cliente' : 'Añadir cliente'
   })
-});
+})
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

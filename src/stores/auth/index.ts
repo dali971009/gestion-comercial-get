@@ -1,9 +1,9 @@
-import {defineStore} from "pinia";
-import {ref} from "vue";
-import type {User} from "@/models/user";
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
+import type { User } from '@/models/user'
 
 export const useAuth = defineStore('auth', () => {
-    const user = ref<User>();
+  const user = ref<User>()
 
-    return { user };
-});
+  return { user }
+})

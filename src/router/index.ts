@@ -1,5 +1,5 @@
-import {createRouter, createWebHistory} from 'vue-router'
-import {RouteNames} from '@/router/route-names'
+import { createRouter, createWebHistory } from 'vue-router'
+import { RouteNames } from '@/router/route-names'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +12,7 @@ const router = createRouter({
         {
           path: 'login',
           name: RouteNames.LOGIN,
-          component: () => import('@/views/LoginView.vue'),
+          component: () => import('@/views/LoginView.vue')
         }
       ]
     },
@@ -25,11 +25,12 @@ const router = createRouter({
           path: 'dashboard',
           name: RouteNames.DASHBOARD,
           component: () => import('@/modules/dashboard/DashboardView.vue'),
+          alias: ['']
         },
         {
           path: 'clients',
           name: RouteNames.CLIENT_LIST,
-          component: () => import('@/modules/clients/ClientListView.vue'),
+          component: () => import('@/modules/clients/ClientListView.vue')
         },
         {
           path: 'clients/new',
@@ -55,10 +56,9 @@ const router = createRouter({
           path: 'invoices',
           name: RouteNames.INVOICE_LIST,
           component: () => import('@/modules/invoices/InvoiceListView.vue')
-        },
-      ],
+        }
+      ]
     },
-
 
     {
       path: '/about',

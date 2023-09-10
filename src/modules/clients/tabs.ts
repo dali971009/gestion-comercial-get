@@ -1,5 +1,5 @@
 export enum ClientTab {
-    GENERAL,
-    CONTACTS,
-    BANK
+  GENERAL,
+  CONTACTS,
+  BANK
 }

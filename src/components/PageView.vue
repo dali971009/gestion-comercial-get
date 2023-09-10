@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex align-center py-4 px-2">
     <the-breadcrumb />
-    <v-spacer/>
+    <v-spacer />
     <slot name="actions" />
   </div>
   <v-card v-if="useCard" class="mx-2">
@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import TheBreadcrumb from "@/components/TheBreadcrumb.vue";
+import TheBreadcrumb from '@/components/TheBreadcrumb.vue'
 
 defineProps({
   useCard: { type: Boolean, default: true }
-});
+})
 </script>
 
 <style scoped>

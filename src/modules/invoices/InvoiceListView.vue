@@ -5,17 +5,17 @@
 </template>
 
 <script setup lang="ts">
-  import PageView from "@/components/PageView.vue";
-  import {onMounted} from "vue";
-  import {useBreadCrumb} from "@/stores/breadcrumb";
+import PageView from '@/components/PageView.vue'
+import { onMounted } from 'vue'
+import { useBreadCrumb } from '@/stores/breadcrumb'
 
-  const breadcrumb = useBreadCrumb();
+const breadcrumb = useBreadCrumb()
 
-  onMounted(() => {
-    breadcrumb.set({
-      title: 'Facturas'
-    })
+onMounted(() => {
+  breadcrumb.set({
+    title: 'Facturas'
   })
+})
 </script>
 
 <style scoped></style>
