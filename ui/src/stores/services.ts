@@ -45,7 +45,7 @@ export const useServicesStore = defineStore('services', () => {
       descriptionLabel: 'Capacidad de almacenamiento',
       services: [
         {
-          id: 1,
+          id: 5,
           description: 'Hasta  10 GB',
           um: 'GB',
           price: 70.0,
@@ -53,7 +53,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 2,
+          id: 6,
           description: 'Más de 10GB y hasta 20 GB',
           um: 'GB',
           price: 140.0,
@@ -61,7 +61,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 3,
+          id: 7,
           description: 'Más de 20 GBy hasta 60 GB',
           um: 'GB',
           price: 406.0,
@@ -69,7 +69,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 4,
+          id: 8,
           description: 'Más de 60 GB y hasta 100 GB',
           um: 'GB',
           price: 665.0,
@@ -77,7 +77,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 5,
+          id: 9,
           description: 'Más de 100 y hasta 200 GB',
           um: 'GB',
           price: 1330.0,
@@ -85,7 +85,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 6,
+          id: 10,
           description: 'Más de 200 GB y hasta 500 GB',
           um: 'GB',
           price: 3325.0,
@@ -93,7 +93,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 1,
+          id: 11,
           description: 'Más de 500GB y hasta 1 TB',
           um: 'GB',
           price: 6790.0,
@@ -106,7 +106,7 @@ export const useServicesStore = defineStore('services', () => {
       name: 'Hospedaje',
       services: [
         {
-          id: 1,
+          id: 12,
           description: 'INSTALACIÓN Y ACTIVACIÓN DEL SERVIDOR VPS (CUOTA ÚNICA)',
           price: 538.92,
           category:
@@ -114,7 +114,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 2,
+          id: 13,
           description:
             'HOSPEDAJE DE SERVIDOR VIRTUAL DEDICADO (TARIFA IGUAL AL 15% CONFIGURACIÓN VPS)',
           category:
@@ -122,7 +122,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 3,
+          id: 14,
           description: '1 GB MEMORIA RAM',
           um: 'GB',
           price: 84.0,
@@ -132,7 +132,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 4,
+          id: 15,
           description: '1MICROPROCESADOR (CPU VIRTUAL)',
           um: 'U',
           price: 84.0,
@@ -142,7 +142,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 5,
+          id: 16,
           description: '1 INTERFACE DE RED',
           um: 'INTERFACE',
           price: 49.0,
@@ -152,7 +152,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 6,
+          id: 17,
           description: 'IP REAL',
           um: 'U',
           price: 7.0,
@@ -162,7 +162,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 7,
+          id: 18,
           description: 'HDD 10 GB',
           um: 'GB',
           price: 70.0,
@@ -172,7 +172,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 8,
+          id: 19,
           description: 'HDD 20 GB',
           um: 'GB',
           price: 140.0,
@@ -182,7 +182,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 9,
+          id: 20,
           description: 'HDD 60 GB',
           um: 'GB',
           price: 406.0,
@@ -192,7 +192,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 10,
+          id: 21,
           description: 'HDD 100 GB',
           um: 'GB',
           price: 665.0,
@@ -202,7 +202,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 11,
+          id: 22,
           description: 'HDD 200 GB',
           um: 'GB',
           price: 1330.0,
@@ -212,7 +212,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 12,
+          id: 23,
           description: 'HDD 500 GB',
           um: 'GB',
           price: 3325.0,
@@ -222,7 +222,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.MONTHLY
         },
         {
-          id: 13,
+          id: 24,
           description: 'HDD 1 TB',
           um: 'TB',
           price: 6790.0,
@@ -237,7 +237,7 @@ export const useServicesStore = defineStore('services', () => {
       name: 'VIDEO CONFERENCIA',
       services: [
         {
-          id: 1,
+          id: 25,
           description: 'VIDEO CONFERENCIA',
           um: 'USUARIO',
           price: 111.5,
@@ -251,7 +251,7 @@ export const useServicesStore = defineStore('services', () => {
       name: ' SEGURIDAD INFORMATICA',
       services: [
         {
-          id: 1,
+          id: 26,
           description: 'Elaboración del Plan de Seguridad Informática',
           um: 'U',
           price: 24307.0,
@@ -259,7 +259,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 2,
+          id: 27,
           description: 'Actualizacion del Plan de Seguridad Informática',
           um: 'U',
           price: 10536.24,
@@ -267,7 +267,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 3,
+          id: 28,
           description: 'Análisis de Trazas de Correo y Navegación (Complejidad Simple)',
           um: 'U',
           price: 802.8,
@@ -276,7 +276,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 4,
+          id: 29,
           description: 'Análisis de Trazas de Correo y Navegación (Complejidad Media)',
           um: 'U',
           price: 1003.5,
@@ -285,7 +285,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 5,
+          id: 30,
           description: 'Análisis de Trazas de Correo y Navegación (Complejidad Alta)',
           um: 'U',
           price: 1360.3,
@@ -294,7 +294,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 6,
+          id: 31,
           description: 'Servicio Integral de Seguridad Informática (Complejidad Simple)',
           um: 'U',
           price: 7124.85,
@@ -303,7 +303,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 7,
+          id: 32,
           description: 'Servicio Integral de Seguridad Informática (Complejidad Media)',
           um: 'U',
           price: 10699.54,
@@ -312,7 +312,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 8,
+          id: 33,
           description: 'Servicio Integral de Seguridad Informática (Complejidad Alta)',
           um: 'U',
           price: 17840.0,
@@ -321,7 +321,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 9,
+          id: 34,
           description: 'Instalación de estación de trabajo para información clasificada',
           um: 'U',
           price: 446.0,
@@ -329,7 +329,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 10,
+          id: 35,
           description: 'Exploraciòn Externa de la Red (Complejidad Simple)',
           um: 'U',
           price: 1288.55,
@@ -338,7 +338,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 11,
+          id: 36,
           description: 'Exploraciòn Externa de la Red (Complejidad Media)',
           um: 'U',
           price: 2577.1,
@@ -347,7 +347,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 12,
+          id: 37,
           description: 'Exploraciòn Externa de la Red (Complejidad Alta)',
           um: 'U',
           price: 5154.19,
@@ -356,7 +356,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 13,
+          id: 38,
           description: 'Exploraciòn Interna de la Red (Complejidad Simple)',
           um: 'U',
           price: 1288.55,
@@ -365,7 +365,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 14,
+          id: 39,
           description: 'Exploraciòn Interna de la Red (Complejidad Media)',
           um: 'U',
           price: 2577.1,
@@ -374,7 +374,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 15,
+          id: 40,
           description: 'Exploraciòn Interna de la Red (Complejidad Alta)',
           um: 'U',
           price: 5154.19,
@@ -388,14 +388,14 @@ export const useServicesStore = defineStore('services', () => {
       name: ' Asistencia Tecnica Especializada',
       services: [
         {
-          id: 1,
+          id: 41,
           description: 'Servicio de Instalación y/o Configuración de Servidor Firewall',
           price: 2691.63,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 2,
+          id: 42,
           description:
             'Servicio de Instalación y/o Configuración de Servidor Firewall con alta disponibilidad',
           price: 3122.0,
@@ -403,14 +403,14 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 3,
+          id: 43,
           description: 'Servicio de Instalación y/o Configuración de Servidor Proxy',
           price: 2691.63,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 4,
+          id: 44,
           description:
             'Servicio de Instalación y/o Configuración de Servidor Proxy con Alta disponibilidad',
           price: 4069.75,
@@ -418,7 +418,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 5,
+          id: 45,
           description:
             'Servicio de Instalación y Configuración de Controlador de Dominio (Hasta 50 users)',
           price: 4906.0,
@@ -426,7 +426,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 6,
+          id: 46,
           description:
             'Servicio de Instalación y Configuración de Controlador de Dominio (Hasta 100 users)',
           price: 9143.0,
@@ -434,7 +434,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 7,
+          id: 47,
           description:
             'Servicio de Instalación y Configuración de Controlador de Dominio (Hasta 300 users)',
           price: 16149.78,
@@ -442,7 +442,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 8,
+          id: 48,
           description:
             'Servicio de Instalación y Configuración de Controlador de Dominio (+ 300 users)',
           price: 34565.0,
@@ -450,28 +450,28 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 9,
+          id: 49,
           description: 'Servicio de Instalación y/o Configuración de DNS.',
           price: 2691.63,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 10,
+          id: 50,
           description: 'Servicio de Instalación y/o Configuración de DHCP',
           price: 2691.63,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 11,
+          id: 51,
           description: 'Servicio de Instalación y/o Configuración de Servidor de correo',
           price: 2248.58,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 12,
+          id: 52,
           description:
             'Servicio de Instalación y/o Configuración de Servicio de mensajería instantánea',
           price: 2691.63,
@@ -479,7 +479,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 13,
+          id: 53,
           description:
             'Servicio de Instalación y/o Configuración de Servicio de actualización de SO (WSUS)',
           price: 2406.96,
@@ -487,7 +487,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 14,
+          id: 54,
           description:
             'Servicio de Instalación y/o Configuración de Servidor de Actualización de Antivirus',
           price: 2691.63,
@@ -495,14 +495,14 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 15,
+          id: 55,
           description: 'Servicio de Instalación y Configuración de Software Antivirus',
           price: 2691.63,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 16,
+          id: 56,
           description:
             'Servicio de Instalación y/o Configuración de Servidor FTP o Servicio de Carpetas compartidas.',
           price: 2691.63,
@@ -510,14 +510,14 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 17,
+          id: 57,
           description: 'Servicio de Instalación y/o Configuración de Servidor de Salvas.',
           price: 2691.63,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 18,
+          id: 58,
           description:
             'Servicio de Instalación y/o Configuración de Servicio de Video Conferencia.',
           price: 28544.0,
@@ -525,42 +525,42 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 19,
+          id: 59,
           description: 'Servicio de Instalación y/o Configuración de Sistema Operativo.',
           price: 278.75,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 20,
+          id: 60,
           description: 'Servicio de Instalación y/o Configuración de dispositivos de red capa 2 ',
           price: 297.33,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 21,
+          id: 61,
           description: 'Servicio de Instalación y Configuración de dispositivos de red capa 3',
           price: 669.0,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 22,
+          id: 62,
           description: 'Servicio de Virtualización de Servidores (Hasta 5 Pcs virtuales)',
           price: 2101.87,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 23,
+          id: 63,
           description: 'Servicio de Virtualización de Servidores (+5 Pcs virtuales)',
           price: 2802.76,
           category: 'SERVICIO DE ASISTENCIA TECNICA ESPECIALIZADA A LA TRANSMISIÓN DE DATOS\t\t',
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 24,
+          id: 64,
           description:
             'Servicio de Reestructuración de un nodo (de 2 a 4 servidores con o sin virtualización)',
           price: 26369.75,
@@ -568,7 +568,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 25,
+          id: 65,
           description:
             'Servicio de Reestructuración de un nodo (de 5 a 10 servidores con o sin virtualización)',
           price: 34318.29,
@@ -576,7 +576,7 @@ export const useServicesStore = defineStore('services', () => {
           invoiceFrequency: InvoiceFrequency.OCCASIONALLY
         },
         {
-          id: 26,
+          id: 66,
           description:
             'Servicio de Reestructuración de un nodo (más de 11 servidores con o sin virtualización)',
           price: 66955.75,

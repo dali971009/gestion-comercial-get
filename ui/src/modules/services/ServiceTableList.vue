@@ -3,6 +3,7 @@
     :headers="headers"
     :items="services"
     table-class-name="data-table"
+    rows-per-page="50"
     border-cell
     hide-footer
   >

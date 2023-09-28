@@ -41,8 +41,8 @@
       color="error"
       prepend-icon="mdi-delete"
       @click="handleDelete"
-      >Eliminar</v-btn
-    >
+      >Eliminar
+     </v-btn>
   </custom-labeled-container>
 </template>
 
@@ -67,7 +67,7 @@ const contact = computed({
 })
 
 function handleDelete() {
-  emit('delete')
+  emit('delete');
 }
 
 onMounted(() => {

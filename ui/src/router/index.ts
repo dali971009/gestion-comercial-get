@@ -56,7 +56,22 @@ const router = createRouter({
           path: 'invoices',
           name: RouteNames.INVOICE_LIST,
           component: () => import('../modules/invoices/InvoiceListView.vue')
-        }
+        },
+        {
+          path: 'production-reports',
+          name: RouteNames.PRODUCTION_REPORT_LIST,
+          component: () => import('../modules/production-reports/ProductionReportListView.vue')
+        },
+        {
+          path: 'production-reports/new',
+          name: RouteNames.PRODUCTION_REPORT_NEW,
+          component: () => import('../modules/production-reports/ProductionReportDetailsView.vue')
+        },
+        {
+          path: 'production-reports/:id/edit',
+          name: RouteNames.PRODUCTION_REPORT_EDIT,
+          component: () => import('../modules/production-reports/ProductionReportDetailsView.vue')
+        },
       ]
     },
 

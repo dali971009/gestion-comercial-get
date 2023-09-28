@@ -26,6 +26,11 @@ export default createVuetify({
       variant: 'outlined',
       density: 'compact',
       color: '#26a69a'
+    },
+    VAutocomplete: {
+      variant: 'outlined',
+      density: 'compact',
+      color: '#26a69a'
     }
   }
 })

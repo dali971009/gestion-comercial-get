@@ -107,11 +107,11 @@ const props = defineProps<{
   modelValue: Client
 }>()
 
-const emit = defineEmits(['update:modelValue '])
+const emit = defineEmits(['update:modelValue'])
 
 const client = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue ', value)
+  set: (value) => emit('update:modelValue', value)
 })
 </script>
 
