@@ -7,9 +7,10 @@ const router = express.Router();
 const authController = useAuthController();
 const userValidator = useUserValidator();
 
-router.post('/email-exists', userValidator.checkEmailValidator, authController.checkEmail);
 router.post('/login', userValidator.userLoginValidator, authController.login);
 router.post('/refresh-token', authController.refreshTokens);
+router.post('/check-token', authController.checkToken);
+router.post('/remove-token', authController.removeTokens);
 router.post('/logout', authController.logout);
 router.put(
     '/change-password',

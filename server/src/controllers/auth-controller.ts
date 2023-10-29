@@ -53,7 +53,11 @@ export const useAuthController = () => {
             if (user.response.status) {
                 tokens = await tokenService.generateAuthTokens(data);
             }
-            res.status(user.statusCode).send({ status, code, message, data, tokens });
+            if (user.statusCode === httpStatus.OK) {
+                res.status(user.statusCode).send({ user: data, tokens });
+            } else {
+                res.status(user.statusCode).send({ status, code, message, data, tokens });
+            }
         } catch (e) {
             logger.error(e);
             res.status(httpStatus.BAD_GATEWAY).send(e);
@@ -67,8 +71,9 @@ export const useAuthController = () => {
 
     async function refreshTokens(req: any, res: any) {
         try {
+            const token = req.header('x-api-key');
             const refreshTokenDoc = await tokenService.verifyToken(
-                req.body.refresh_token,
+                token,
                 TokenType.REFRESH,
             );
             const user = await userService.getUserByUuid(refreshTokenDoc.userId);
@@ -84,6 +89,44 @@ export const useAuthController = () => {
         }
     }
 
+    async function checkToken(req: any, res: any) {
+        try {
+            const token = req.header('x-api-key');
+            const refreshTokenDoc = await tokenService.verifyToken(
+                token,
+                TokenType.REFRESH,
+            );
+            const user = await userService.getUserByUuid(refreshTokenDoc.userId);
+            if (user == null) {
+                res.status(httpStatus.BAD_GATEWAY).send('User Not Found!');
+            }
+            res.status(httpStatus.OK).send();
+        } catch (e) {
+            logger.error(e);
+            res.status(httpStatus.FORBIDDEN).send(e);
+        }
+    }
+
+    async function removeTokens(req: any, res: any) {
+        try {
+            const { accessToken, refreshToken } = req.body;
+            const accessTokenDoc = await tokenService.verifyToken(
+                accessToken,
+                TokenType.ACCESS,
+            );
+            const refreshTokenDoc = await tokenService.verifyToken(
+                refreshToken,
+                TokenType.ACCESS,
+            );
+            await tokenService.removeTokenById(accessTokenDoc.id);
+            await tokenService.removeTokenById(refreshTokenDoc.id);
+            res.status(httpStatus.OK).send();
+        } catch (e) {
+            logger.error(e);
+            res.status(httpStatus.FORBIDDEN).send(e);
+        }
+    }
+
     async function changePassword(req: any, res: any) {
         try {
             const responseData = await userService.changePassword(req.body, req.user.uuid);
@@ -94,5 +137,5 @@ export const useAuthController = () => {
         }
     }
 
-    return { register, checkEmail, login, logout, refreshTokens, changePassword }
+    return { register, checkEmail, login, logout, refreshTokens, checkToken, removeTokens, changePassword }
 }

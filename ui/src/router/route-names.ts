@@ -1,4 +1,4 @@
-export enum RouteNames {
+enum RouteNames {
   LOGIN = 'LOGIN',
   DASHBOARD = 'DASHBOARD',
   CLIENT_LIST = 'CLIENT_LIST',
@@ -12,5 +12,7 @@ export enum RouteNames {
   CONTRACT_EDIT = 'CONTRACT_EDIT',
   INVOICE_LIST = 'INVOICE_LIST',
   INVOICE_NEW = 'INVOICE_NEW',
-  INVOICE_EDIT = 'INVOICE_EDIT'
+  INVOICE_EDIT = 'INVOICE_EDIT',
 }
+
+export default RouteNames;

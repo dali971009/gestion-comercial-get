@@ -1,11 +1,12 @@
 import httpStatus from "http-status";
 import config from "../config/config";
 import logger from "../config/logger";
-import ApiError from "../helper/api-error";
+import ApiError from "../helper/errors/api-error";
+import {FormError} from "../helper/errors/form-error";
 
 export const errorConverter = (err: any, req: any, res: any, next: any) => {
     let error = err;
-    if (!(error instanceof ApiError)) {
+    if (!(error instanceof ApiError) && !(error instanceof FormError)) {
         const statusCode: number = error.statusCode
             ? httpStatus.BAD_REQUEST
             : httpStatus.INTERNAL_SERVER_ERROR;
@@ -17,6 +18,9 @@ export const errorConverter = (err: any, req: any, res: any, next: any) => {
 
 // eslint-disable-next-line no-unused-vars
 export const errorHandler = (err: any, req: any, res: any, next: any) => {
+    if (err instanceof FormError) {
+        res.status(err.statusCode).send({ errors: err.errors});
+    }
     let { statusCode, message } = err;
     if (config.nodeEnv === 'production' && !err.isOperational) {
         statusCode = httpStatus.INTERNAL_SERVER_ERROR;

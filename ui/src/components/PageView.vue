@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import TheBreadcrumb from './TheBreadcrumb.vue'
+import TheBreadcrumb from './TheBreadcrumb.vue';
 
 defineProps({
-  useCard: { type: Boolean, default: true }
-})
+  useCard: { type: Boolean, default: true },
+});
 </script>
 
 <style scoped>

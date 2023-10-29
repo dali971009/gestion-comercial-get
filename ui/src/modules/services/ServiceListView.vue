@@ -2,12 +2,9 @@
   <page-view :use-card="false">
     <v-sheet class="mb-2" border>
       <v-tabs v-model="selectedTab">
-        <v-tab
-          v-for="(group, i) in servicesStore.serviceGroups"
-          :key="'tab_' + i"
-          :value="group.name"
-          >{{ group.name }}</v-tab
-        >
+        <v-tab v-for="(group, i) in servicesStore.serviceGroups" :key="'tab_' + i" :value="group.name">
+          {{ group.name }}
+        </v-tab>
       </v-tabs>
       <v-divider />
       <v-window v-model="selectedTab">
@@ -25,22 +22,22 @@
 </template>
 
 <script setup lang="ts">
-import PageView from '../../components/PageView.vue'
-import { onMounted, ref } from 'vue'
-import { useBreadCrumb } from '../../stores/breadcrumb'
-import { useServicesStore } from '../../stores/services'
-import ServiceTableList from './ServiceTableList.vue'
+import PageView from '../../components/PageView.vue';
+import { onMounted, ref } from 'vue';
+import { useBreadCrumb } from '../../stores/breadcrumb';
+import { useServicesStore } from '../../stores/services';
+import ServiceTableList from './ServiceTableList.vue';
 
-const breadcrumb = useBreadCrumb()
-const servicesStore = useServicesStore()
+const breadcrumb = useBreadCrumb();
+const servicesStore = useServicesStore();
 
-const selectedTab = ref<string>()
+const selectedTab = ref<string>();
 
 onMounted(() => {
   breadcrumb.set({
-    title: 'Servicios'
-  })
-})
+    title: 'Servicios',
+  });
+});
 </script>
 
 <style scoped>

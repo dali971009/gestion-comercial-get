@@ -22,47 +22,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { RouteNames } from '../router/route-names'
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import RouteNames from '../router/route-names';
 
-const route = useRoute()
+const route = useRoute();
 
 defineProps({
-  expanded: { type: Boolean, default: true }
-})
+  expanded: { type: Boolean, default: true },
+});
 
 interface MenuItem {
-  icon: string
-  title: string
-  routeName?: RouteNames
+  icon: string;
+  title: string;
+  routeName?: RouteNames;
 }
 
 const items = ref<MenuItem[]>([
   {
     icon: 'mdi-account-group',
     title: 'Clientes',
-    routeName: RouteNames.CLIENT_LIST
+    routeName: RouteNames.CLIENT_LIST,
   },
   {
     icon: 'mdi-tag',
     title: 'Servicios',
-    routeName: RouteNames.SERVICE_LIST
+    routeName: RouteNames.SERVICE_LIST,
   },
   {
     icon: 'mdi-file-document-edit-outline',
     title: 'Contratos',
-    routeName: RouteNames.CONTRACT_LIST
+    routeName: RouteNames.CONTRACT_LIST,
   },
   {
     icon: 'mdi-receipt',
     title: 'Facturas',
-    routeName: RouteNames.INVOICE_LIST
-  }
-])
+    routeName: RouteNames.INVOICE_LIST,
+  },
+]);
 
 function isActive(routeName?: RouteNames): boolean {
-  return typeof routeName !== 'undefined' && route.name === routeName
+  return typeof routeName !== 'undefined' && route.name === routeName;
 }
 </script>
 

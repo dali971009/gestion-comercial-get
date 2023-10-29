@@ -9,8 +9,8 @@
 
 <script setup lang="ts">
 defineProps({
-  label: { type: String, required: false, default: '' }
-})
+  label: { type: String, required: false, default: '' },
+});
 </script>
 
 <style scoped>

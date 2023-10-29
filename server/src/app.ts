@@ -5,7 +5,7 @@ import httpStatus from 'http-status';
 import jwtStrategy from './config/passport';
 import routes from './routes';
 import {errorConverter, errorHandler} from './middlewares/error';
-import ApiError from './helper/api-error';
+import ApiError from './helper/errors/api-error';
 
 process.env.PWD = process.cwd();
 

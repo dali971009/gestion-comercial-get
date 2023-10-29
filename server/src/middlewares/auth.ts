@@ -1,6 +1,6 @@
 import passport from "passport";
 import httpStatus from "http-status";
-import ApiError from "../helper/api-error";
+import ApiError from "../helper/errors/api-error";
 
 const verifyCallback = (req: any, res: any, resolve: any, reject: any) => {
     return async (err: any, user: any, info: any) => {

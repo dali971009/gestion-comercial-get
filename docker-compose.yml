@@ -5,10 +5,12 @@ services:
       dockerfile: Dockerfile
       context: ./ui
     container_name: gestion_comercial_get_ui
+    ports:
+      - '5173:5173'
     command: npm run dev
     volumes:
-      - ./ui:/usr/app/ui
-      - ./ui/node_modules:/usr/app/ui/node_modules
+      - ./ui:/usr/app
+      - ./ui/node_modules:/usr/app/node_modules
     networks:
       - gestion_comercial_get_network
       - host
@@ -20,7 +22,7 @@ services:
       context: ./server
     container_name: gestion_comercial_get_server
     ports:
-      - 5000:5000
+      - '5000:5000'
     command: npm run dev
     volumes:
       - ./server:/usr/app
@@ -53,7 +55,7 @@ services:
     image: library/postgres:15
     container_name: gestion_comercial_get_postgres
     ports:
-      - 5432:5432
+      - '5432:5432'
     command: [ 'postgres', '-c', 'log_statement=all' ]
     environment:
       - POSTGRES_USER=user

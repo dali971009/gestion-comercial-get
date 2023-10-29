@@ -1,6 +1,6 @@
 import Joi from "joi";
 import httpStatus from "http-status";
-import ApiError from "../helper/api-error";
+import {FormError, FormValidationError} from "../helper/errors/form-error";
 
 export const useUserValidator = () => {
 
@@ -17,12 +17,27 @@ export const useUserValidator = () => {
 
         if (error) {
             // on fail return comma separated errors
-            const errorMessage = error.details
-                .map((details) => {
-                    return details.message;
-                })
-                .join(', ');
-            next(new ApiError(httpStatus.BAD_REQUEST, errorMessage));
+            const errorMessages: {[attribute: string]: FormValidationError} = {};
+            error.details.forEach((details) => {
+                if (details.context?.key !== undefined) {
+                    errorMessages[details.context.key] = {
+                        type: details.type
+                    };
+                    if (details.type === 'string.min') {
+                        errorMessages[details.context.key].params = {
+                            min: details.context.limit,
+                        };
+                    }
+                } else {
+                    errorMessages.extra = {
+                        type: details.type,
+                        params: {
+                            message: details.message,
+                        }
+                    };
+                }
+            });
+            next(new FormError(errorMessages));
         } else {
             // on success replace req.body with validated value and trigger next middleware function
             req.body = value;

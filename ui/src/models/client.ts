@@ -1,14 +1,14 @@
 export enum ClientStatus {
   ACTIVE,
-  DELETED
+  DELETED,
 }
 
 export interface Contact {
-  position?: string
-  fullName?: string
-  ci?: string
-  email?: string
-  phone?: string
+  position?: string;
+  fullName?: string;
+  ci?: string;
+  email?: string;
+  phone?: string;
 }
 
 /**
@@ -16,31 +16,31 @@ export interface Contact {
  * @param code: The client id
  */
 export interface Client {
-  code?: number // id
-  officialName?: string
-  acronym?: string
-  creationDate?: string
-  organism?: string
-  osdeGroupUnion?: string
-  company?: string
-  codeREEUP?: string
-  nit?: string
-  commercialRegister?: string
-  address?: string
-  municipality?: string
-  province?: string
+  code?: number; // id
+  officialName?: string;
+  acronym?: string;
+  creationDate?: string;
+  organism?: string;
+  osdeGroupUnion?: string;
+  company?: string;
+  codeREEUP?: string;
+  nit?: string;
+  commercialRegister?: string;
+  address?: string;
+  municipality?: string;
+  province?: string;
   staff: {
     executiveStaff: {
-      director: Contact
-      economic: Contact
-      it: Contact
-    }
-    authorizedPeople: Contact[]
-  }
+      director: Contact;
+      economic: Contact;
+      it: Contact;
+    };
+    authorizedPeople: Contact[];
+  };
   bankData: {
-    bankAccount?: string
-    accountName?: string
-    bank?: string
-  }
-  status?: ClientStatus
+    bankAccount?: string;
+    accountName?: string;
+    bank?: string;
+  };
+  status?: ClientStatus;
 }
