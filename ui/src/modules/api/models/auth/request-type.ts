@@ -1,0 +1,8 @@
+enum RequestType {
+  NEW_SESSION = 'NEW_SESSION',
+  CHECK_SESSION = 'CHECK_SESSION',
+  DELETE_SESSION = 'DELETE_SESSION',
+  REFRESH_SESSION = 'REFRESH_SESSION',
+}
+
+export default RequestType;

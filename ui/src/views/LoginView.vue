@@ -1,54 +1,84 @@
 <template>
-  <div class="d-flex justify-center align-center fill-height bg-teal-lighten-5">
+  <div class="d-flex justify-center align-center fill-height bg-loginBackground">
     <v-card class="d-flex container" rounded="shaped">
       <v-form class="d-flex flex-column align-center py-8 px-16">
-        <h2 class="text-center mt-2 mb-4">Bienvenido</h2>
+        <h2 class="text-center mt-2 mb-8 text-primary">Bienvenido</h2>
         <v-text-field
-          v-model="username"
-          placeholder="Usuario"
+          v-model="email"
+          placeholder="Correo"
           prepend-inner-icon="mdi-account-outline"
-          style="min-width: 300px"
-          :error="hasError"
+          style="width: 300px"
+          :error-messages="errors.email"
         />
         <v-text-field
           v-model="password"
           placeholder="Contraseña"
           prepend-inner-icon="mdi-lock-outline"
-          style="min-width: 300px"
+          style="width: 300px"
           type="password"
-          :error-messages="hasError ? errorMessage : ''"
+          :error-messages="errors.password"
         />
-        <v-checkbox label="Recordar contraseña" hide-details />
-        <a href="#" class="text-decoration-none pt-2 pb-4">¿Olvidó su contraseña?</a>
-        <v-btn @click.prevent="login" rounded>Entrar</v-btn>
+        <div class="d-flex justify-space-between align-center align-self-stretch mt-8 mb-2">
+          <a href="#" class="text-decoration-none text-primary">¿Olvidó su contraseña?</a>
+          <v-btn @click.prevent="login" rounded="8" :disabled="isLoading">
+            <template v-if="isLoading" #prepend>
+              <v-progress-circular size="14" width="2" indeterminate />
+            </template>
+            Entrar
+          </v-btn>
+        </div>
       </v-form>
-      <div class="bg-teal-lighten-1 flex-1-0"></div>
+      <div class="flex-1-0 bg-primary"></div>
     </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { RouteNames } from '../router/route-names'
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import RouteNames from '@/router/route-names';
+import { AxiosError } from 'axios';
+import { useErrorHandler } from '@/helpers/errors/error-handler';
+import { useAuth, useSnackBar } from '@/stores';
+import { messages } from '@/helpers/messages';
 
-const username = ref<string>('')
-const password = ref<string>('')
+const email = ref<string>('');
+const password = ref<string>('');
 
-const errorMessage = 'Usuario o contraseña incorrectos'
-const hasError = ref<boolean>(false)
+const errorHandler = useErrorHandler();
+const errors = errorHandler.getErrorObj;
 
-const router = useRouter()
+const isLoading = ref<boolean>(false);
 
-function login() {
-  hasError.value = false
+const router = useRouter();
+const authStore = useAuth();
+const snackbarStore = useSnackBar();
 
-  if (username.value !== 'admin' || password.value !== 'admin') {
-    hasError.value = true
-    return
+async function login() {
+  errorHandler.reset();
+  isLoading.value = true;
+
+  try {
+    await authStore
+      .newSession({ email: email.value, password: password.value })
+      .then(() => {
+        isLoading.value = false;
+      })
+      .catch(error => {
+        throw error;
+      });
+    await router.push({ name: RouteNames.DASHBOARD });
+  } catch (error: any) {
+    if (!errorHandler.handleErrorResponse(error)) {
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        snackbarStore.push({ color: 'error', text: messages.AUTH.WRONG_CREDENTIALS });
+      } else {
+        snackbarStore.push({ color: 'error', text: error });
+      }
+      console.error(error);
+    }
+    isLoading.value = false;
   }
-
-  router.push({ name: RouteNames.DASHBOARD })
 }
 </script>
 
@@ -59,13 +89,7 @@ function login() {
 .v-btn {
   color: white !important;
 }
-
 h2 {
   font-size: 24pt;
-  color: #26a69a;
-}
-
-a {
-  color: #26a69a;
 }
 </style>

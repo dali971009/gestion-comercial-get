@@ -1,4 +1,4 @@
-import { InvoiceFrequency } from './service'
-import { ClientStatus } from './client'
+import { InvoiceFrequency } from './service';
+import { ClientStatus } from './client';
 
-export default { InvoiceFrequency, ClientStatus }
+export default { InvoiceFrequency, ClientStatus };

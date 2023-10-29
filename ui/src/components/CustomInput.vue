@@ -24,8 +24,8 @@
 defineProps({
   label: { type: String, required: false, default: '' },
   required: { type: Boolean, required: false, default: false },
-  infoIcon: { type: Boolean, required: false, default: false }
-})
+  infoIcon: { type: Boolean, required: false, default: false },
+});
 </script>
 
 <style scoped>

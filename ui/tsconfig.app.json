@@ -2,15 +2,15 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": [
     "env.d.ts",
-    "ui/src/**/*",
-    "ui/src/**/*.vue"
+    "./src/**/*",
+    "./src/**/*.vue"
   ],
   "exclude": [
-    "ui/src/**/__tests__/*"
+    "./src/**/__tests__/*"
   ],
   "compilerOptions": {
     "composite": true,
-    "baseUrl": "..",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

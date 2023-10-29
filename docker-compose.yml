@@ -1,0 +1,74 @@
+version: '3.8'
+services:
+  ui:
+    build:
+      dockerfile: Dockerfile
+      context: ./ui
+    container_name: gestion_comercial_get_ui
+    ports:
+      - '5173:5173'
+    command: npm run dev
+    volumes:
+      - ./ui:/usr/app
+      - ./ui/node_modules:/usr/app/node_modules
+    networks:
+      - gestion_comercial_get_network
+      - host
+
+# api:
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    container_name: gestion_comercial_get_server
+    ports:
+      - '5000:5000'
+    command: npm run dev
+    volumes:
+      - ./server:/usr/app
+      - ./server/node_modules:/usr/app/node_modules
+    environment:
+      #Server environment
+      - NODE_ENV=development
+      #Port number
+      - PORT=5000
+      #Db configuration
+      - DATABASE_URL=postgresql://user:pass@postgres:5432/test
+      # JWT configuration
+      - JWT_SECRET=your-jwt-secret-key # secret key
+      - JWT_ACCESS_EXPIRATION_MINUTES=5 # Number of minutes after which an access token expires
+      - JWT_REFRESH_EXPIRATION_DAYS=30 # Number of days after which a refresh token expires
+      #Log configuration
+      - LOG_FOLDER=logs/
+      - LOG_FILE=%DATE%-app-log.log
+      - LOG_LEVEL=error
+      #Redis configuration
+      - REDIS_HOST=redis-host
+      - REDIS_PORT=6379
+      - REDIS_USE_PASSWORD=no
+      - REDIS_PASSWORD=your-password
+    networks:
+      - gestion_comercial_get_network
+      - host
+
+  postgres:
+    image: library/postgres:15
+    container_name: gestion_comercial_get_postgres
+    ports:
+      - '5432:5432'
+    command: [ 'postgres', '-c', 'log_statement=all' ]
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=test
+    networks:
+      - gestion_comercial_get_network
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+networks:
+  gestion_comercial_get_network:
+  host:
+
+volumes:
+  postgres: {}

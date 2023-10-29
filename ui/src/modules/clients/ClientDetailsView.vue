@@ -29,64 +29,64 @@
 </template>
 
 <script setup lang="ts">
-import PageView from '../../components/PageView.vue'
-import CustomLabeledContainer from '../../components/CustomLabeledContainer.vue'
-import { useBreadCrumb } from '../../stores/breadcrumb'
-import { onMounted, ref } from 'vue'
-import { RouteNames } from '../../router/route-names'
-import { useRoute } from 'vue-router'
-import type { Client } from '../../models/client'
-import { useClientsStore } from '../../stores/clients'
-import router from '../../router'
-import { ClientTab } from './tabs'
-import ClientGeneralForm from './forms/ClientGeneralForm.vue'
-import ClientContactsForm from './forms/ClientContactsForm.vue'
-import ClientBankForm from './forms/ClientBankForm.vue'
+import PageView from '../../components/PageView.vue';
+import CustomLabeledContainer from '../../components/CustomLabeledContainer.vue';
+import { useBreadCrumb } from '../../stores/breadcrumb';
+import { onMounted, ref } from 'vue';
+import RouteNames from '../../router/route-names';
+import { useRoute } from 'vue-router';
+import type { Client } from '../../models/client';
+import { useClientsStore } from '../../stores/clients';
+import router from '../../router';
+import { ClientTab } from './tabs';
+import ClientGeneralForm from './forms/ClientGeneralForm.vue';
+import ClientContactsForm from './forms/ClientContactsForm.vue';
+import ClientBankForm from './forms/ClientBankForm.vue';
 
-const breadcrumb = useBreadCrumb()
-const route = useRoute()
-const clientsStore = useClientsStore()
+const breadcrumb = useBreadCrumb();
+const route = useRoute();
+const clientsStore = useClientsStore();
 
-const selectedTab = ref<ClientTab>(ClientTab.GENERAL)
+const selectedTab = ref<ClientTab>(ClientTab.GENERAL);
 
-const edit = route.name === RouteNames.CLIENT_EDIT
-const clientCode = parseInt(route.params.client_code?.toString() ?? '')
+const edit = route.name === RouteNames.CLIENT_EDIT;
+const clientCode = parseInt(route.params.client_code?.toString() ?? '');
 
 const client = ref<Client>({
   staff: {
     executiveStaff: {
       director: {},
       economic: {},
-      it: {}
+      it: {},
     },
-    authorizedPeople: []
+    authorizedPeople: [],
   },
-  bankData: {}
-})
+  bankData: {},
+});
 
 function loadClient() {
-  client.value = clientsStore.loadClient(clientCode)
+  client.value = clientsStore.loadClient(clientCode);
 }
 
 function handleSave() {
   if (edit) {
-    clientsStore.updateClient(clientCode, client.value)
+    clientsStore.updateClient(clientCode, client.value);
   } else {
-    clientsStore.addClient(client.value)
+    clientsStore.addClient(client.value);
   }
-  router.push({ name: RouteNames.CLIENT_LIST })
+  router.push({ name: RouteNames.CLIENT_LIST });
 }
 
 onMounted(() => {
   if (edit) {
-    loadClient()
+    loadClient();
   }
   breadcrumb.set({
     back: { name: RouteNames.CLIENT_LIST },
     backLabel: 'Clientes',
-    title: edit ? 'Editar cliente' : 'Añadir cliente'
-  })
-})
+    title: edit ? 'Editar cliente' : 'Añadir cliente',
+  });
+});
 </script>
 
 <style scoped></style>
