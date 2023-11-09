@@ -52,7 +52,7 @@ const items = ref<MenuItem[]>([
   {
     icon: 'mdi-tag',
     title: 'Reportes de producción',
-    routeName: RouteNames.PRODUCTION_REPORT_LIST
+    routeName: RouteNames.PRODUCTION_REPORT_LIST,
   },
   {
     icon: 'mdi-file-document-edit-outline',
@@ -82,7 +82,7 @@ function isActive(routeName?: RouteNames): boolean {
 }
 
 .nav-active {
-  color: #26a69a;
+  color: #106697;
 }
 
 .nav-active::v-deep(.v-list-item__overlay) {
@@ -92,7 +92,7 @@ function isActive(routeName?: RouteNames): boolean {
 .nav-active:before {
   content: '';
   position: absolute;
-  background-color: #26a69a;
+  background-color: #106697;
   width: 5px;
   height: 100%;
   border-radius: 0 10px 10px 0;

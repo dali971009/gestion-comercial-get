@@ -1,6 +1,6 @@
 <template>
   <header>
-    <v-app-bar elevation="0" density="compact" class="bg-teal">
+    <v-app-bar elevation="0" density="compact" class="bg-primary">
       <v-app-bar-nav-icon color="grey-darken-4" @click="$emit('nav-icon-pressed')" />
       <v-app-bar-title class="ma-0">
         <router-link :to="{ name: RouteNames.DASHBOARD }" class="text-grey-darken-4 text-decoration-none">

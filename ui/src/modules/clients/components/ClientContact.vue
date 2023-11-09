@@ -48,7 +48,9 @@ const emit = defineEmits(['update:modelValue', 'delete']);
 
 const contact = computed({
   get: () => props.modelValue,
-  set: value => emit('update:modelValue ', value),
+  set: value => {
+    emit('update:modelValue', value);
+  },
 });
 
 function handleDelete() {

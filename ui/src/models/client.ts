@@ -4,11 +4,13 @@ export enum ClientStatus {
 }
 
 export interface Contact {
-  position?: string;
+  id?: string;
   fullName?: string;
   ci?: string;
+  position?: string;
   email?: string;
   phone?: string;
+  isMainStaff?: boolean;
 }
 
 /**
@@ -16,7 +18,8 @@ export interface Contact {
  * @param code: The client id
  */
 export interface Client {
-  code?: number; // id
+  id?: string;
+  code?: number;
   officialName?: string;
   acronym?: string;
   creationDate?: string;
@@ -30,17 +33,13 @@ export interface Client {
   municipality?: string;
   province?: string;
   staff: {
-    executiveStaff: {
-      director: Contact;
-      economic: Contact;
-      it: Contact;
-    };
+    director?: Contact;
+    economic?: Contact;
+    itPerson?: Contact;
     authorizedPeople: Contact[];
   };
-  bankData: {
-    bankAccount?: string;
-    accountName?: string;
-    bank?: string;
-  };
   status?: ClientStatus;
+  bankAccount?: string;
+  accountName?: string;
+  bank?: string;
 }

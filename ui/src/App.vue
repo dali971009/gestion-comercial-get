@@ -12,4 +12,8 @@
 .v-btn {
   color: white;
 }
+.data-table {
+  --easy-table-header-font-color: white;
+  --easy-table-header-background-color: #106697;
+}
 </style>

@@ -6,25 +6,17 @@
         Añadir cliente
       </v-btn>
     </template>
-    <easy-data-table
-      :headers="headers"
-      :items="clientsStore.clients"
-      table-class-name="data-table"
-      border-cell
-      hide-footer
-    >
+    <easy-data-table :headers="headers" :items="clients" table-class-name="data-table" border-cell hide-footer>
       <template #item-actions="item">
         <div class="d-flex justify-center">
-          <v-btn
-            variant="flat"
-            height="28"
-            class="text-none"
-            prepend-icon="mdi-pencil"
-            color="blue"
-            :to="{ name: RouteNames.CLIENT_EDIT, params: { client_code: item.code } }"
-          >
-            Editar
-          </v-btn>
+          <v-tooltip>
+            <template #activator="attrs">
+              <router-link :to="{ name: RouteNames.CLIENT_EDIT, params: { id: item.id } }">
+                <v-icon icon="mdi-pencil" color="primary" v-bind="attrs.props" />
+              </router-link>
+            </template>
+            Editar cliente
+          </v-tooltip>
         </div>
       </template>
     </easy-data-table>
@@ -34,13 +26,14 @@
 <script setup lang="ts">
 import RouteNames from '../../router/route-names';
 import PageView from '../../components/PageView.vue';
-import { useClientsStore } from '../../stores/clients';
 import { Header } from 'vue3-easy-data-table';
-import { onMounted } from 'vue';
-import { useBreadCrumb } from '../../stores/breadcrumb';
+import { onMounted, ref } from 'vue';
+import { useBreadCrumb } from '@/stores/breadcrumb';
+import type { Client } from '@/models/client';
+import { makeClientApi } from '@/modules/api/proxy';
 
 const breadcrumb = useBreadCrumb();
-const clientsStore = useClientsStore();
+const clients = ref<Client[]>([]);
 
 const headers: Header[] = [
   { text: 'Código', value: 'code' },
@@ -49,22 +42,20 @@ const headers: Header[] = [
   { text: 'Dirección', value: 'address' },
   { text: 'NIT', value: 'nit' },
   { text: 'Código REEUP U ONE', value: 'codeREEUP' },
-  { text: 'Opciones', value: 'actions' },
+  { text: '', value: 'actions' },
 ];
+
+async function fetchClients() {
+  const response = await makeClientApi().getClients();
+  clients.value = response.data;
+}
 
 onMounted(() => {
   breadcrumb.set({
     title: 'Clientes',
   });
+  fetchClients();
 });
 </script>
 
-<style scoped>
-.v-btn {
-  color: white;
-}
-.data-table {
-  --easy-table-header-font-color: white;
-  --easy-table-header-background-color: #26a69a;
-}
-</style>
+<style scoped></style>

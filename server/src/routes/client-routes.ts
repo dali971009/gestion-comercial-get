@@ -7,9 +7,9 @@ const router = express.Router();
 const clientController = useClientController();
 const clientValidator = useClientValidator();
 
-router.get('/', auth(), clientController.getAllClients);
-router.get('/:id', auth(), clientValidator.getClientValidator, clientController.getClient);
-router.post('/create', auth(), clientValidator.createClientValidator, clientController.createClient);
-router.put('/:id/update', auth(), clientValidator.updateClientValidator, clientController.updateClient);
+router.get('/', clientController.getAllClients);
+router.get('/:id', clientValidator.getClientValidator, clientController.getClient);
+router.post('/', clientValidator.createClientValidator, clientController.createClient);
+router.put('/:id', clientValidator.updateClientValidator, clientController.updateClient);
 
 export default router;

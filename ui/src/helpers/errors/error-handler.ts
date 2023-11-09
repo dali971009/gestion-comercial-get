@@ -1,9 +1,15 @@
-import { ErrorResponse } from './error-response';
-import { computed, ref } from 'vue';
+import { type ErrorResponse } from './error-response';
+import { computed, type ComputedRef, ref } from 'vue';
 import { AxiosError } from 'axios';
 import { makeErrorMessage } from './util';
 
-export const useErrorHandler = () => {
+export interface ErrorHandlerInterface {
+  handleErrorResponse(error?: any): boolean;
+  getErrorObj: ComputedRef<{ [key: string]: string }>;
+  reset(): void;
+}
+
+export const useErrorHandler = (): ErrorHandlerInterface => {
   const _errors = ref<ErrorResponse[]>([]);
 
   function handleErrorResponse(error?: any) {
