@@ -25,6 +25,7 @@ const clientData: Prisma.ClientCreateInput[] = [
         id: uuidv4(),
         officialName: 'Sucursal Marlin Cayo Largo del Sur',
         code: '115716',
+        creationDate: new Date(),
         osdeGroupUnion: 'Test place',
         address: 'Cayo Largo del Sur, Los Canarreos',
         codeREEUP: '256.0.60655',
@@ -34,6 +35,14 @@ const clientData: Prisma.ClientCreateInput[] = [
         bankAccount: '4068 9221 2173 40016',
         bank: 'Metropolitano',
         status: ClientStatus.ACTIVE,
+        authorizedPeople: {
+            create: {
+                fullName: 'Ricardo Garcia',
+                ci: '7894564123',
+                position: 'Director',
+                isMainStaff: true,
+            },
+        },
     },
 ]
 

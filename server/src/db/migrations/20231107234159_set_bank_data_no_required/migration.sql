@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Client" ALTER COLUMN "bankAccount" DROP NOT NULL,
+ALTER COLUMN "accountName" DROP NOT NULL,
+ALTER COLUMN "bank" DROP NOT NULL;

@@ -33,11 +33,12 @@ model Token {
 
 model ClientContact {
   id       String  @id @default(uuid())
-  fullname String
+  fullName String
   ci       String
   position String
   email    String?
   phone    String?
+  isMainStaff Boolean @default(false)
   clientId String
   client   Client  @relation(fields: [clientId], references: [id])
 }
@@ -59,7 +60,7 @@ model Client {
   province           String?
   authorizedPeople   ClientContact[]
   status             Int
-  bankAccount        String
-  accountName        String
-  bank               String
+  bankAccount        String?
+  accountName        String?
+  bank               String?
 }
