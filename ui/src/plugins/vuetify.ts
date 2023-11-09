@@ -14,6 +14,10 @@ export default createVuetify({
       variant: 'outlined',
       density: 'compact',
     },
+    VAutocomplete: {
+      variant: 'outlined',
+      density: 'compact',
+    },
     VCheckbox: {
       density: 'compact',
     },

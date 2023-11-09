@@ -41,6 +41,21 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../../modules/clients/ClientDetailsView.vue'),
       },
       {
+        path: 'users',
+        name: RouteNames.USER_LIST,
+        component: () => import('../../modules/users/UserListView.vue'),
+      },
+      {
+        path: 'users/new',
+        name: RouteNames.USER_NEW,
+        component: () => import('../../modules/users/UserDetailsView.vue'),
+      },
+      {
+        path: 'users/:id/edit',
+        name: RouteNames.USER_EDIT,
+        component: () => import('../../modules/users/UserDetailsView.vue'),
+      },
+      {
         path: 'services',
         name: RouteNames.SERVICE_LIST,
         component: () => import('../../modules/services/ServiceListView.vue'),

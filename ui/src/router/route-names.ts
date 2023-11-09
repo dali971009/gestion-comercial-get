@@ -13,6 +13,10 @@ enum RouteNames {
   INVOICE_LIST = 'INVOICE_LIST',
   INVOICE_NEW = 'INVOICE_NEW',
   INVOICE_EDIT = 'INVOICE_EDIT',
+
+  USER_LIST = 'USER_LIST',
+  USER_NEW = 'USER_NEW',
+  USER_EDIT = 'USER_EDIT',
 }
 
 export default RouteNames;

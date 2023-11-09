@@ -16,41 +16,36 @@ export const useUserService = () => {
 
     async function createUser(userBody: any) {
         try {
-            let message = 'Successfully Registered the account! Please Verify your email.';
             if (await emailExists(userBody.email)) {
-                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email already taken');
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'email.taken');
             }
-            const uuid = uuidV4();
+            userBody.id = uuidV4();
             userBody.email = userBody.email.toLowerCase();
             userBody.password = bcrypt.hashSync(userBody.password, 8);
-            userBody.id = uuid;
             userBody.status = UserStatus.ACTIVE;
-            userBody.email_verified = UserEmailStatus.NOT_VERIFIED;
+            userBody.emailVerified = UserEmailStatus.NOT_VERIFIED;
 
-            let userData = await prisma.user.create(userBody);
+            let userData = await prisma.user.create({
+                data: userBody
+            });
 
             if (!userData) {
-                message = 'Registration Failed! Please Try again.';
-                return responseHandler.returnError(httpStatus.BAD_REQUEST, message);
+                return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
             }
 
             // @ts-ignore
             delete userData.password;
 
-            return responseHandler.returnSuccess(httpStatus.CREATED, message, userData);
+            return responseHandler.returnSuccess(httpStatus.CREATED, 'success', userData);
         } catch (e) {
             logger.error(e);
-            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
+            return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
         }
     }
 
-    /* async function emailExists(email: string) {
-        const message = 'Email found!';
-        if (!(await userDao.isEmailExists(email))) {
-            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Email not Found!!');
-        }
-        return responseHandler.returnSuccess(httpStatus.OK, message);
-    }*/
+    async function getUsers() {
+        return prisma.user.findMany();
+    }
 
     async function getUserByUuid(uuid: string) {
         return prisma.user.findUnique({
@@ -58,6 +53,41 @@ export const useUserService = () => {
                 id: uuid,
             },
         });
+    }
+
+    async function updateUser(userBody: any) {
+        console.log(userBody);
+        try {
+            userBody.email = userBody.email.toLowerCase();
+            if (userBody.password !== undefined && userBody.password2 !== undefined) {
+                if (userBody.password === userBody.password2) {
+                    userBody.password = bcrypt.hashSync(userBody.password, 8);
+                } else {
+                    return responseHandler.returnError(httpStatus.NOT_FOUND, 'user.passwords_are_different');
+                }
+            }
+
+            delete userBody.password2;
+
+            let userData = await prisma.user.update({
+                data: userBody,
+                where: {
+                    id: userBody.id,
+                }
+            });
+
+            if (!userData) {
+                return responseHandler.returnError(httpStatus.NOT_FOUND, 'user.not_found');
+            }
+
+            // @ts-ignore
+            delete userData.password;
+
+            return responseHandler.returnSuccess(httpStatus.OK, userData);
+        } catch (e) {
+            logger.error(e);
+            return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Something went wrong!');
+        }
     }
 
     async function changePassword(data: any, uuid: string) {
@@ -103,5 +133,5 @@ export const useUserService = () => {
         return responseHandler.returnError(httpStatus.BAD_REQUEST, 'Password Update Failed!');
     }
 
-    return { createUser, emailExists, getUserByUuid, changePassword }
+    return { createUser, updateUser, emailExists, getUserByUuid, getUsers, changePassword }
 }

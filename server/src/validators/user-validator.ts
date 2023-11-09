@@ -1,6 +1,8 @@
 import Joi from "joi";
 import httpStatus from "http-status";
 import {FormError, FormValidationError} from "../helper/errors/form-error";
+import ApiError from "../helper/errors/api-error";
+import {UserStatus} from "../config/enums/user-status";
 
 export const useUserValidator = () => {
 
@@ -28,6 +30,11 @@ export const useUserValidator = () => {
                             min: details.context.limit,
                         };
                     }
+                    if (details.context.key === 'password2' && details.type === 'any.only') {
+                        errorMessages[details.context.key] = {
+                            type: 'password.match'
+                        }
+                    }
                 } else {
                     errorMessages.extra = {
                         type: details.type,
@@ -40,6 +47,7 @@ export const useUserValidator = () => {
             next(new FormError(errorMessages));
         } else {
             // on success replace req.body with validated value and trigger next middleware function
+            console.log(value);
             req.body = value;
             return next();
         }
@@ -48,13 +56,40 @@ export const useUserValidator = () => {
     async function userCreateValidator(req: any, res: any, next: any) {
         // create schema object
         const schema = Joi.object({
+            firstName: Joi.string().required(),
+            lastName: Joi.string().required(),
             email: Joi.string().email().required(),
-            password: Joi.string().min(6).required(),
-            confirm_password: Joi.string().valid(Joi.ref('password')).required(),
-            first_name: Joi.string(),
-            last_name: Joi.string(),
+            status: Joi.number().valid(UserStatus.ACTIVE, UserStatus.INACTIVE, UserStatus.REMOVED),
+            phoneNumber: Joi.string(),
+            address: Joi.string(),
+            password: Joi.string().min(6),
         });
         validate(schema, req, res, next);
+    }
+
+    async function updateUserValidator(req: any, res: any, next: any) {
+        // create schema object
+        const schema = Joi.object({
+            id: Joi.string().uuid().required(),
+            firstName: Joi.string().required(),
+            lastName: Joi.string().required(),
+            email: Joi.string().email().required(),
+            status: Joi.number().valid(UserStatus.ACTIVE, UserStatus.INACTIVE, UserStatus.REMOVED),
+            phoneNumber: Joi.string(),
+            address: Joi.string(),
+            password: Joi.string().min(6),
+            password2: Joi.string().valid(Joi.ref('password')),
+        });
+        validate(schema, req, res, next);
+    }
+
+    async function getUserValidator(req: any, res: any, next: any) {
+        const { error, value } = Joi.string().uuid().validate(req.params.id);
+        if (error) {
+            next(new ApiError(httpStatus.BAD_REQUEST, 'invalid_id'))
+        } else {
+            next()
+        }
     }
 
     async function userLoginValidator(req: any, res: any, next: any) {
@@ -84,5 +119,5 @@ export const useUserValidator = () => {
         validate(schema, req, res, next);
     }
 
-    return { userCreateValidator, userLoginValidator, checkEmailValidator, changePasswordValidator }
+    return { userCreateValidator, userLoginValidator, checkEmailValidator, changePasswordValidator, getUserValidator, updateUserValidator }
 }

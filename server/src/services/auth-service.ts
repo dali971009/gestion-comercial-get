@@ -5,6 +5,7 @@ import TokenDao from "../dao/token-dao";
 import {TokenType} from "../config/enums/token-type";
 import responseHandler from "../helper/response-handler";
 import logger from "../config/logger";
+import {UserStatus} from "../config/enums/user-status";
 // import RedisService from "./RedisService";
 
 export const useAuthService = () => {
@@ -13,30 +14,28 @@ export const useAuthService = () => {
 
     async function loginWithEmailPassword(email: string, password: string) {
         try {
-            let message = 'Login Successful';
             let statusCode: number = httpStatus.OK;
             let user = await userDao.findByEmail(email);
             if (user == null) {
-                return responseHandler.returnError(
-                    httpStatus.BAD_REQUEST,
-                    'Invalid Email Address!',
-                );
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'credentials');
             }
+            if (user.status !== UserStatus.ACTIVE) {
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'user.active');
+            }
+
             const isPasswordValid = await bcrypt.compare(password, user.password);
 
             // @ts-ignore
             delete user.password;
 
             if (!isPasswordValid) {
-                statusCode = httpStatus.BAD_REQUEST;
-                message = 'Wrong Password!';
-                return responseHandler.returnError(statusCode, message);
+                return responseHandler.returnError(httpStatus.BAD_REQUEST, 'credentials');
             }
 
-            return responseHandler.returnSuccess(statusCode, message, user);
+            return responseHandler.returnSuccess(statusCode, 'success', user);
         } catch (e) {
             logger.error(e);
-            return responseHandler.returnError(httpStatus.BAD_GATEWAY, 'Something Went Wrong!!');
+            return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
         }
     }
 

@@ -11,10 +11,11 @@ export function makeErrorMessage(errorResponse: ErrorResponse): string {
       return `Este campo debe contener al menos ${errorResponse.params?.min} caracteres`;
     case ErrorType.EMAIL:
       return 'El email no es válido';
+    case ErrorType.PASSWORDS_MATCH:
+      return 'Las contraseñas no coinciden';
+
     case ErrorType.REQUIRED_IF:
       return 'This field is required';
-    case ErrorType.PASSWORDS_MATCH:
-      return 'The passwords do not match';
     case ErrorType.URL:
     case ErrorType.INVALID_URL:
       return 'This is not a valid URL';

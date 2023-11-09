@@ -64,6 +64,11 @@ const items = ref<MenuItem[]>([
     title: 'Facturas',
     routeName: RouteNames.INVOICE_LIST,
   },
+  {
+    icon: 'mdi-account-group',
+    title: 'Usuarios',
+    routeName: RouteNames.USER_LIST,
+  },
 ]);
 
 function isActive(routeName?: RouteNames): boolean {
