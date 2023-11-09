@@ -15,7 +15,7 @@
       <v-divider />
       <v-window v-model="selectedTab">
         <v-window-item :value="ClientTab.GENERAL">
-          <client-general-form v-model="client" />
+          <client-general-form v-model="client" :error-handler="errorHandler" />
         </v-window-item>
         <v-window-item :value="ClientTab.CONTACTS">
           <client-contacts-form v-model="client" />
@@ -30,56 +30,80 @@
 
 <script setup lang="ts">
 import PageView from '../../components/PageView.vue';
-import CustomLabeledContainer from '../../components/CustomLabeledContainer.vue';
-import { useBreadCrumb } from '../../stores/breadcrumb';
+import { useBreadCrumb } from '@/stores/breadcrumb';
 import { onMounted, ref } from 'vue';
 import RouteNames from '../../router/route-names';
 import { useRoute } from 'vue-router';
-import type { Client } from '../../models/client';
-import { useClientsStore } from '../../stores/clients';
+import type { Client } from '@/models/client';
 import router from '../../router';
 import { ClientTab } from './tabs';
 import ClientGeneralForm from './forms/ClientGeneralForm.vue';
 import ClientContactsForm from './forms/ClientContactsForm.vue';
 import ClientBankForm from './forms/ClientBankForm.vue';
+import { makeClientApi } from '@/modules/api/proxy';
+import { isArray } from 'lodash';
+import { useSnackBar } from '@/stores';
+import { AxiosError } from 'axios';
+import { messages } from '@/helpers/messages';
+import { useErrorHandler } from '@/helpers/errors/error-handler';
 
 const breadcrumb = useBreadCrumb();
+const snackbar = useSnackBar();
 const route = useRoute();
-const clientsStore = useClientsStore();
 
 const selectedTab = ref<ClientTab>(ClientTab.GENERAL);
 
 const edit = route.name === RouteNames.CLIENT_EDIT;
-const clientCode = parseInt(route.params.client_code?.toString() ?? '');
+const clientId = isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
 const client = ref<Client>({
+  id: '',
   staff: {
-    executiveStaff: {
-      director: {},
-      economic: {},
-      it: {},
-    },
     authorizedPeople: [],
   },
-  bankData: {},
 });
 
-function loadClient() {
-  client.value = clientsStore.loadClient(clientCode);
+const errorHandler = useErrorHandler();
+const snackbarStore = useSnackBar();
+
+async function fetchClient() {
+  try {
+    const response = await makeClientApi().getClient({ clientId });
+    client.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
-function handleSave() {
-  if (edit) {
-    clientsStore.updateClient(clientCode, client.value);
-  } else {
-    clientsStore.addClient(client.value);
+async function handleSave() {
+  try {
+    if (edit) {
+      await makeClientApi().updateClient({ client: client.value, clientId: clientId });
+      snackbar.push({ color: 'error', text: 'Se han actualizado los datos del cliente' });
+    } else {
+      await makeClientApi().createClient({ client: client.value });
+      snackbar.push({ color: 'error', text: 'Se ha creado un nuevo cliente' });
+    }
+    router.push({ name: RouteNames.CLIENT_LIST });
+  } catch (error: any) {
+    if (!errorHandler.handleErrorResponse(error)) {
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        snackbarStore.push({
+          color: 'error',
+          text: `Ocurrió un error ${edit ? 'actualizando' : 'creando'} el cliente`,
+        });
+        snackbarStore.push({ color: 'error', text: messages.AUTH.WRONG_CREDENTIALS });
+      } else {
+        snackbarStore.push({ color: 'error', text: error });
+      }
+      console.error(error);
+    }
   }
-  router.push({ name: RouteNames.CLIENT_LIST });
 }
 
 onMounted(() => {
   if (edit) {
-    loadClient();
+    fetchClient();
   }
   breadcrumb.set({
     back: { name: RouteNames.CLIENT_LIST },

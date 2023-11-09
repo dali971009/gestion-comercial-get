@@ -36,7 +36,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../../modules/clients/ClientDetailsView.vue'),
       },
       {
-        path: 'clients/:client_code/edit',
+        path: 'clients/:id/edit',
         name: RouteNames.CLIENT_EDIT,
         component: () => import('../../modules/clients/ClientDetailsView.vue'),
       },

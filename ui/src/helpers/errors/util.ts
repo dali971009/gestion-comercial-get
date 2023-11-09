@@ -3,13 +3,14 @@ import { ErrorResponse } from '@/helpers/errors/error-response';
 
 export function makeErrorMessage(errorResponse: ErrorResponse): string {
   switch (errorResponse.type) {
+    case ErrorType.REQUIRED:
+      return 'Este campo es obligatorio';
     case ErrorType.STRING_EMPTY:
       return 'Este campo no puede estar vacío';
     case ErrorType.STRING_MIN:
-      return `Este campo debe contener al menos de ${errorResponse.params.min} caracteres`;
+      return `Este campo debe contener al menos ${errorResponse.params?.min} caracteres`;
     case ErrorType.EMAIL:
       return 'El email no es válido';
-    case ErrorType.REQUIRED:
     case ErrorType.REQUIRED_IF:
       return 'This field is required';
     case ErrorType.PASSWORDS_MATCH:

@@ -1,5 +1,4 @@
 import Joi from "joi";
-import httpStatus from "http-status";
 import {FormError, FormValidationError} from "../helper/errors/form-error";
 
 export const useClientValidator = () => {
@@ -46,25 +45,78 @@ export const useClientValidator = () => {
     }
 
     async function createClientValidator(req: any, res: any, next: any) {
+        const clientContactSchema = Joi.object({
+            fullName: Joi.string(),
+            ci: Joi.string(),
+            position: Joi.string(),
+            email: Joi.string().email(),
+            phone: Joi.string(),
+            isMainStaff: Joi.boolean(),
+        });
         // create schema object
         const schema = Joi.object({
-            // TODO add all validation
+          code: Joi.string().required(),
+          officialName: Joi.string().required(),
+          acronym: Joi.string(),
+          creationDate: Joi.date(),
+          organism: Joi.string(),
+          osdeGroupUnion: Joi.string(),
+          company: Joi.string(),
+          codeREEUP: Joi.string(),
+          nit: Joi.string(),
+          commercialRegister: Joi.string(),
+          address: Joi.string(),
+          municipality: Joi.string(),
+          province: Joi.string(),
+          /* TODO staff: Joi.object({
+              director: Joi.valid(clientContactSchema),
+              economic: Joi.valid(clientContactSchema),
+              itPerson: Joi.valid(clientContactSchema),
+              authorizedPeople: Joi.array().items((
+                Joi.object(Joi.valid(clientContactSchema))
+              )),
+          }), */
+          // TODO authorizedPeople: Joi.string(),
+          status: Joi.number().integer(),
+          bankAccount: Joi.string(),
+          accountName: Joi.string(),
+          bank: Joi.string(),
         });
         validate(schema, req, res, next);
     }
 
     async function updateClientValidator(req: any, res: any, next: any) {
+      Joi.string().uuid().validate(req.params.id);
+      // TODO validate id in url match id in body
         // create schema object
         const schema = Joi.object({
-            // TODO add all validation
+          code: Joi.string(),
+          officialName: Joi.string(),
+          acronym: Joi.string(),
+          creationDate: Joi.date(),
+          organism: Joi.string(),
+          osdeGroupUnion: Joi.string(),
+          company: Joi.string(),
+          codeREEUP: Joi.string(),
+          nit: Joi.string(),
+          commercialRegister: Joi.string(),
+          address: Joi.string(),
+          municipality: Joi.string(),
+          province: Joi.string(),
+          // TODO authorizedPeople: Joi.string(),
+          status: Joi.number().integer(),
+          bankAccount: Joi.string(),
+          accountName: Joi.string(),
+          bank: Joi.string(),
         });
         validate(schema, req, res, next);
     }
 
     async function getClientValidator(req: any, res: any, next: any) {
+        Joi.string().uuid().validate(req.params.id);
         // create schema object
         const schema = Joi.object({
-            id: Joi.string().uuid().required(),
+            // id: Joi.string().uuid().required(),
         });
         validate(schema, req, res, next);
     }

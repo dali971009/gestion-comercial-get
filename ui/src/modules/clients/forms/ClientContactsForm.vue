@@ -1,9 +1,9 @@
 <template>
   <v-form class="ma-2">
     <h3>Personal directivo</h3>
-    <client-contact v-model="client.staff.executiveStaff.director" position="Director" />
-    <client-contact v-model="client.staff.executiveStaff.economic" position="Económico" />
-    <client-contact v-model="client.staff.executiveStaff.it" position="Informático" />
+    <client-contact v-model="director" position="Director" />
+    <client-contact v-model="economic" position="Económico" />
+    <client-contact v-model="itPerson" position="Informático" />
     <div class="d-flex align-center mt-6">
       <h3>
         Personas autorizadas por la entidad a operar con el prestador ({{ client.staff.authorizedPeople.length }}/3)
@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { type Client } from '../../../models/client';
+import { type Client, type Contact } from '@/models/client';
 import { computed } from 'vue';
-import ClientContact from '../components/ClientContact.vue';
+import ClientContact from '@/modules/clients/components/ClientContact.vue';
 
 const props = defineProps<{
   modelValue: Client;
@@ -41,6 +41,33 @@ const emit = defineEmits(['update:modelValue ']);
 const client = computed({
   get: () => props.modelValue,
   set: value => emit('update:modelValue ', value),
+});
+
+const director = computed<Contact>({
+  get() {
+    return client.value.staff.director ?? { position: 'Director', isMainStaff: true };
+  },
+  set(value) {
+    client.value = { ...client.value, staff: { ...client.value.staff, director: value } };
+  },
+});
+
+const economic = computed<Contact>({
+  get() {
+    return client.value.staff.economic ?? { position: 'Económico', isMainStaff: true };
+  },
+  set(value) {
+    client.value = { ...client.value, staff: { ...client.value.staff, economic: value } };
+  },
+});
+
+const itPerson = computed<Contact>({
+  get() {
+    return client.value.staff.itPerson ?? { position: 'Informático', isMainStaff: true };
+  },
+  set(value) {
+    client.value = { ...client.value, staff: { ...client.value.staff, itPerson: value } };
+  },
 });
 
 function addAuthorizedPerson() {

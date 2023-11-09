@@ -3,6 +3,7 @@ import AuthApi, { type AuthApiInterface } from './auth';
 import BaseApi from './base';
 import type RequestType from '@/modules/api/models/auth/request-type';
 import lodash from 'lodash';
+import ClientApi, { type ClientApiInterface } from '@/modules/api/clients';
 
 // @ts-ignore
 const basePath: string = import.meta.env.VITE_API_BASE_PATH;
@@ -22,4 +23,6 @@ const makeAuthApi = (requestType?: RequestType, token?: string): AuthApiInterfac
     'Request-Type': requestType,
   });
 
-export { makeAuthApi };
+const makeClientApi = (): ClientApiInterface => makeApiInstance(ClientApi);
+
+export { makeAuthApi, makeClientApi };

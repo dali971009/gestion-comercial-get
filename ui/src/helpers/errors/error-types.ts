@@ -1,10 +1,10 @@
 enum ErrorType {
+  REQUIRED = 'any.required',
   STRING_EMPTY = 'string.empty',
   STRING_MIN = 'string.min',
   EMAIL = 'string.email',
 
   PASSWORDS_MATCH = 'passwordsmatch',
-  REQUIRED = 'required',
   REQUIRED_IF = 'required_if',
   CHECK_RPM = 'check_rpm',
   INHERIT_WITH_RESERVED_QUOTA = 'inherit_with_reserved_quota',

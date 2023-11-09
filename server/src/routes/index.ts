@@ -1,13 +1,18 @@
 import express from "express";
 
-import authRoute from "./auth-routes";
+import authRoutes from "./auth-routes";
+import clientRoutes from "./client-routes";
 
 const router = express.Router();
 
 const defaultRoutes = [
     {
         path: '/auth',
-        route: authRoute,
+        route: authRoutes,
+    },
+    {
+        path: '/clients',
+        route: clientRoutes,
     },
 ];
 
