@@ -64,3 +64,18 @@ model Client {
   accountName        String?
   bank               String?
 }
+
+model ServiceType {
+  id       String    @id @default(uuid())
+  name     String
+  services Service[]
+}
+
+model Service {
+  id        String      @id @default(uuid())
+  typeId    String
+  type      ServiceType @relation(fields: [typeId], references: [id])
+  unit      String?
+  price     Decimal
+  frequency Int
+}

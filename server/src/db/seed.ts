@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {UserEmailStatus, UserStatus} from "../config/enums/user-status";
 import bcrypt from "bcryptjs";
 import {ClientStatus} from "../config/enums/client-status";
+import { serviceTypeData } from './seeders/service-type-seeder'
 
 const prisma = new PrismaClient()
 
@@ -52,18 +53,21 @@ async function main() {
     await prisma.user.deleteMany();
     await prisma.clientContact.deleteMany();
     await prisma.client.deleteMany();
-    for (const u of userData) {
-        const user = await prisma.user.create({
-            data: u,
-        })
-        console.log(`Created user with id: ${user.id}`)
+    await prisma.serviceType.deleteMany();
+
+    for (const data of userData) {
+        const user = await prisma.user.create({ data });
+        console.log(`Created user with id: ${user.id}`);
     }
-    for (const c of clientData) {
-        const client = await prisma.client.create({
-            data: c
-        })
-        console.log(`Created client with id: ${client.id}`)
+    for (const data of clientData) {
+        const client = await prisma.client.create({ data });
+        console.log(`Created client with id: ${client.id}`);
     }
+    for (const data of serviceTypeData) {
+        const serviceType = await prisma.serviceType.create({ data });
+        console.log(`Created service type with id: ${serviceType.id}`);
+    }
+
     console.log(`Seeding finished.`)
 }
 

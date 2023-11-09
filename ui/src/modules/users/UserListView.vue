@@ -36,8 +36,8 @@ import { Header } from 'vue3-easy-data-table';
 import { onMounted, ref } from 'vue';
 import { useBreadCrumb } from '@/stores/breadcrumb';
 import type { User } from '@/models/user';
-import {makeUserApi } from '@/modules/api/proxy';
-import {UserStatus} from "@/models/user";
+import { makeUserApi } from '@/modules/api/proxy';
+import { UserStatus } from '@/models/user';
 
 const breadcrumb = useBreadCrumb();
 const users = ref<User[]>([]);

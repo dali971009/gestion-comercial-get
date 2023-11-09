@@ -46,6 +46,11 @@ const items = ref<MenuItem[]>([
   },
   {
     icon: 'mdi-tag',
+    title: 'Tipos de servicio',
+    routeName: RouteNames.SERVICE_TYPE_LIST,
+  },
+  {
+    icon: 'mdi-tag',
     title: 'Servicios',
     routeName: RouteNames.SERVICE_LIST,
   },

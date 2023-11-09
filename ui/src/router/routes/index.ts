@@ -56,6 +56,21 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../../modules/users/UserDetailsView.vue'),
       },
       {
+        path: 'service-types',
+        name: RouteNames.SERVICE_TYPE_LIST,
+        component: () => import('../../modules/service-type/ServiceTypeListView.vue'),
+      },
+      {
+        path: 'service-types/new',
+        name: RouteNames.SERVICE_TYPE_NEW,
+        component: () => import('../../modules/service-type/ServiceTypeDetailsView.vue'),
+      },
+      {
+        path: 'service-types/:id/edit',
+        name: RouteNames.SERVICE_TYPE_EDIT,
+        component: () => import('../../modules/service-type/ServiceTypeDetailsView.vue'),
+      },
+      {
         path: 'services',
         name: RouteNames.SERVICE_LIST,
         component: () => import('../../modules/services/ServiceListView.vue'),

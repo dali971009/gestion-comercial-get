@@ -23,10 +23,10 @@
     <responsive-form-field>
       <custom-input label="Correo" required>
         <v-text-field
-            placeholder="Inserte el correo"
-            v-model="user.email"
-            :hide-details="typeof errors.email === 'undefined'"
-            :error-messages="errors.email"
+          placeholder="Inserte el correo"
+          v-model="user.email"
+          :hide-details="typeof errors.email === 'undefined'"
+          :error-messages="errors.email"
         />
       </custom-input>
     </responsive-form-field>
@@ -44,31 +44,31 @@
     <responsive-form-field>
       <custom-input label="Teléfono">
         <v-text-field
-            placeholder="Inserte el teléfono"
-            v-model="user.phoneNumber"
-            :hide-details="typeof errors.phoneNumber === 'undefined'"
-            :error-messages="errors.phoneNumber"
+          placeholder="Inserte el teléfono"
+          v-model="user.phoneNumber"
+          :hide-details="typeof errors.phoneNumber === 'undefined'"
+          :error-messages="errors.phoneNumber"
         />
       </custom-input>
     </responsive-form-field>
     <responsive-form-field>
       <custom-input label="Dirección">
         <v-text-field
-            placeholder="Inserte la dirección"
-            v-model="user.address"
-            :hide-details="typeof errors.address === 'undefined'"
-            :error-messages="errors.address"
+          placeholder="Inserte la dirección"
+          v-model="user.address"
+          :hide-details="typeof errors.address === 'undefined'"
+          :error-messages="errors.address"
         />
       </custom-input>
     </responsive-form-field>
     <responsive-form-field v-if="!edit">
       <custom-input label="Contraseña" required>
         <v-text-field
-            placeholder="Inserte la contraseña"
-            v-model="user.password"
-            type="password"
-            :hide-details="typeof errors.password === 'undefined'"
-            :error-messages="errors.password"
+          placeholder="Inserte la contraseña"
+          v-model="user.password"
+          type="password"
+          :hide-details="typeof errors.password === 'undefined'"
+          :error-messages="errors.password"
         />
       </custom-input>
     </responsive-form-field>
@@ -78,22 +78,22 @@
         <responsive-form-field>
           <custom-input label="Contraseña">
             <v-text-field
-                placeholder="Inserte la contraseña"
-                v-model="user.password"
-                type="password"
-                :hide-details="typeof errors.password === 'undefined'"
-                :error-messages="errors.password"
+              placeholder="Inserte la contraseña"
+              v-model="user.password"
+              type="password"
+              :hide-details="typeof errors.password === 'undefined'"
+              :error-messages="errors.password"
             />
           </custom-input>
         </responsive-form-field>
         <responsive-form-field>
           <custom-input label="Contraseña">
             <v-text-field
-                placeholder="Repita la contraseña"
-                v-model="user.password2"
-                type="password"
-                :hide-details="typeof errors.password2 === 'undefined'"
-                :error-messages="errors.password2"
+              placeholder="Repita la contraseña"
+              v-model="user.password2"
+              type="password"
+              :hide-details="typeof errors.password2 === 'undefined'"
+              :error-messages="errors.password2"
             />
           </custom-input>
         </responsive-form-field>
@@ -104,7 +104,7 @@
 
 <script setup lang="ts">
 import CustomInput from '@/components/CustomInput.vue';
-import {type User, UserStatus, UserWithPassword} from '@/models/user';
+import { type User, UserStatus, UserWithPassword } from '@/models/user';
 import { computed } from 'vue';
 import ResponsiveFormField from '@/components/ResponsiveFormField.vue';
 import type { ErrorHandlerInterface } from '@/helpers/errors/error-handler';
@@ -126,7 +126,7 @@ const statuses = [
   { title: 'Activo', value: UserStatus.ACTIVE },
   { title: 'Inactivo', value: UserStatus.INACTIVE },
   { title: 'Eliminado', value: UserStatus.REMOVED },
-]
+];
 
 const errors = computed(() => props.errorHandler.getErrorObj.value);
 </script>

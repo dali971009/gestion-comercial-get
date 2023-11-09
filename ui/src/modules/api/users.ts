@@ -8,11 +8,7 @@ import type {
   UpdateUserResponse,
 } from '@/modules/api/models/auth/user-responses';
 import type { User } from '@/models/user';
-import type {
-  CreateUserRequest,
-  GetUserRequest,
-  UpdateUserRequest,
-} from '@/modules/api/models/auth/user-requests';
+import type { CreateUserRequest, GetUserRequest, UpdateUserRequest } from '@/modules/api/models/auth/user-requests';
 
 export interface UserApiInterface {
   getUsersRaw(): Promise<AxiosResponse>;
