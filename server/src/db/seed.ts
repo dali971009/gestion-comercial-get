@@ -53,6 +53,7 @@ async function main() {
     await prisma.user.deleteMany();
     await prisma.clientContact.deleteMany();
     await prisma.client.deleteMany();
+    await prisma.service.deleteMany();
     await prisma.serviceType.deleteMany();
 
     for (const data of userData) {

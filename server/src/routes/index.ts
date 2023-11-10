@@ -4,6 +4,7 @@ import authRoutes from "./auth-routes";
 import clientRoutes from "./client-routes";
 import userRoutes from "./user-routes";
 import serviceTypeRoutes from "./service-type-routes";
+import serviceRoutes from "./service-routes";
 
 const router = express.Router();
 
@@ -23,6 +24,10 @@ const defaultRoutes = [
     {
         path: '/service-types',
         route: serviceTypeRoutes,
+    },
+    {
+        path: '/services',
+        route: serviceRoutes,
     },
 ];
 

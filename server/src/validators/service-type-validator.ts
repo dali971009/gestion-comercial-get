@@ -46,6 +46,8 @@ export const useServiceTypeValidator = () => {
         // create schema object
         const schema = Joi.object({
             name: Joi.string().required(),
+            description: Joi.string(),
+            serviceDescription: Joi.string(),
         });
         validate(schema, req, res, next);
     }
@@ -55,6 +57,8 @@ export const useServiceTypeValidator = () => {
         const schema = Joi.object({
             id: Joi.string().uuid().required(),
             name: Joi.string().required(),
+            description: Joi.string().allow(''),
+            serviceDescription: Joi.string().allow(''),
         });
         validate(schema, req, res, next);
     }

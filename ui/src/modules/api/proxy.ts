@@ -8,6 +8,8 @@ import type { UserApiInterface } from '@/modules/api/users';
 import UserApi from '@/modules/api/users';
 import type { ServiceTypeApiInterface } from '@/modules/api/service-types';
 import ServiceTypeApi from '@/modules/api/service-types';
+import type { ServiceApiInterface } from '@/modules/api/services';
+import ServiceApi from '@/modules/api/services';
 
 // @ts-ignore
 const basePath: string = import.meta.env.VITE_API_BASE_PATH;
@@ -33,4 +35,6 @@ const makeUserApi = (): UserApiInterface => makeApiInstance(UserApi);
 
 const makeServiceTypeApi = (): ServiceTypeApiInterface => makeApiInstance(ServiceTypeApi);
 
-export { makeAuthApi, makeClientApi, makeUserApi, makeServiceTypeApi };
+const makeServiceApi = (): ServiceApiInterface => makeApiInstance(ServiceApi);
+
+export { makeAuthApi, makeClientApi, makeUserApi, makeServiceTypeApi, makeServiceApi };

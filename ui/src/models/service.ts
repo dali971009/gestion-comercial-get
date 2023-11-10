@@ -1,18 +1,19 @@
 export interface ServiceGroup {
+  id: string;
   name: string;
-  descriptionLabel?: string;
+  description?: string;
+  serviceDescription?: string;
   services: Service[];
 }
 
 export interface Service {
-  id: number;
-  description: string;
-  um?: string;
-  amount?: number;
+  id?: string;
+  typeId?: string;
+  description?: string;
+  extraDescription?: string;
+  unit?: string;
   price?: number;
-  category: string;
-  subcategory?: string;
-  invoiceFrequency?: InvoiceFrequency;
+  frequency?: InvoiceFrequency;
 }
 
 export enum InvoiceFrequency {

@@ -1,12 +1,12 @@
 <template>
-  <page-view title="Añadir tipo de servicio" :use-card="false">
+  <page-view title="Añadir servicio" :use-card="false">
     <template #actions>
       <v-btn class="text-subtitle-1" style="color: white" @click="handleSave" rounded>
         <v-icon icon="mdi-check" class="mr-2" />
         Guardar
       </v-btn>
     </template>
-    <service-type-form v-model="serviceType" :edit="edit" :error-handler="errorHandler" />
+    <service-form v-model="service" :edit="edit" :error-handler="errorHandler" />
   </page-view>
 </template>
 
@@ -16,9 +16,9 @@ import { useBreadCrumb } from '@/stores/breadcrumb';
 import { onMounted, ref } from 'vue';
 import RouteNames from '@/router/route-names';
 import { useRoute, useRouter } from 'vue-router';
-import type { ServiceType } from '@/models/serviceType';
-import ServiceTypeForm from './ServiceTypeForm.vue';
-import { makeServiceTypeApi } from '@/modules/api/proxy';
+import type { Service } from '@/models/service';
+import ServiceForm from './ServiceForm.vue';
+import { makeServiceApi } from '@/modules/api/proxy';
 import { isArray } from 'lodash';
 import { useSnackBar } from '@/stores';
 import { AxiosError } from 'axios';
@@ -30,20 +30,20 @@ const snackbar = useSnackBar();
 const route = useRoute();
 const router = useRouter();
 
-const edit = route.name === RouteNames.SERVICE_TYPE_EDIT;
-const serviceTypeId = isArray(route.params.id) ? route.params.id[0] : route.params.id;
+const edit = route.name === RouteNames.SERVICE_EDIT;
+const serviceId = isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
-const serviceType = ref<ServiceType>({
+const service = ref<Service>({
   id: '',
 });
 
 const errorHandler = useErrorHandler();
 const snackbarStore = useSnackBar();
 
-async function fetchServiceType() {
+async function fetchService() {
   try {
-    const response = await makeServiceTypeApi().getServiceType({ id: serviceTypeId });
-    serviceType.value = response.data;
+    const response = await makeServiceApi().getService({ id: serviceId });
+    service.value = response.data;
   } catch (error) {
     console.error(error);
   }
@@ -52,19 +52,19 @@ async function fetchServiceType() {
 async function handleSave() {
   try {
     if (edit) {
-      await makeServiceTypeApi().updateServiceType({ serviceType: serviceType.value });
-      snackbar.push({ color: 'error', text: 'Se han actualizado los datos del tipo de servicio' });
+      await makeServiceApi().updateService({ service: service.value });
+      snackbar.push({ color: 'error', text: 'Se han actualizado los datos del servicio' });
     } else {
-      await makeServiceTypeApi().createServiceType({ serviceType: serviceType.value });
-      snackbar.push({ color: 'error', text: 'Se ha creado un nuevo tipo de servicio' });
+      await makeServiceApi().createService({ service: service.value });
+      snackbar.push({ color: 'error', text: 'Se ha creado un nuevo servicio' });
     }
-    router.push({ name: RouteNames.SERVICE_TYPE_LIST });
+    router.push({ name: RouteNames.SERVICE_LIST });
   } catch (error: any) {
     if (!errorHandler.handleErrorResponse(error)) {
       if (error instanceof AxiosError && error.response?.status === 400) {
         snackbarStore.push({
           color: 'error',
-          text: `Ocurrió un error ${edit ? 'actualizando' : 'creando'} el tipo de servicio`,
+          text: `Ocurrió un error ${edit ? 'actualizando' : 'creando'} el servicio`,
         });
         snackbarStore.push({ color: 'error', text: messages.AUTH.WRONG_CREDENTIALS });
       } else {
@@ -77,12 +77,12 @@ async function handleSave() {
 
 onMounted(() => {
   if (edit) {
-    fetchServiceType();
+    fetchService();
   }
   breadcrumb.set({
-    back: { name: RouteNames.SERVICE_TYPE_LIST },
-    backLabel: 'Tipos de servicio',
-    title: edit ? 'Editar tipo de servicio' : 'Añadir tipo de servicio',
+    back: { name: RouteNames.SERVICE_LIST },
+    backLabel: 'Servicio',
+    title: edit ? 'Editar servicio' : 'Añadir servicio',
   });
 });
 </script>

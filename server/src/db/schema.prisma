@@ -66,16 +66,20 @@ model Client {
 }
 
 model ServiceType {
-  id       String    @id @default(uuid())
-  name     String
-  services Service[]
+  id                 String    @id @default(uuid())
+  name               String
+  description        String?
+  serviceDescription String?
+  services           Service[]
 }
 
 model Service {
-  id        String      @id @default(uuid())
-  typeId    String
-  type      ServiceType @relation(fields: [typeId], references: [id])
-  unit      String?
-  price     Decimal
-  frequency Int
+  id               String      @id @default(uuid())
+  typeId           String
+  description      String
+  extraDescription String?
+  type             ServiceType @relation(fields: [typeId], references: [id])
+  unit             String?
+  price            Decimal?
+  frequency        Int?
 }

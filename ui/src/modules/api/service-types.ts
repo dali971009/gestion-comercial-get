@@ -3,11 +3,11 @@ import BaseApi from './base';
 import _ from 'lodash';
 import type {
   CreateServiceTypeResponse,
+  GetServiceTypeLabelsResponse,
   GetServiceTypeResponse,
   GetServiceTypesResponse,
   UpdateServiceTypeResponse,
 } from '@/modules/api/models/service-type/service-type-responses';
-import type { ServiceType } from '@/models/service-type';
 import type {
   CreateServiceTypeRequest,
   GetServiceTypeRequest,
@@ -17,6 +17,8 @@ import type {
 export interface ServiceTypeApiInterface {
   getServiceTypesRaw(): Promise<AxiosResponse>;
   getServiceTypes(): Promise<GetServiceTypesResponse>;
+  getServiceTypeLabelsRaw(): Promise<AxiosResponse>;
+  getServiceTypeLabels(): Promise<GetServiceTypeLabelsResponse>;
   getServiceTypeRaw(request: GetServiceTypeRequest): Promise<AxiosResponse>;
   getServiceType(request: GetServiceTypeRequest): Promise<GetServiceTypeResponse>;
   createServiceTypeRaw(request: CreateServiceTypeRequest): Promise<AxiosResponse>;
@@ -39,8 +41,17 @@ class ServiceTypeApi extends BaseApi implements ServiceTypeApiInterface {
     return { data: response.data };
   }
 
+  async getServiceTypeLabelsRaw(): Promise<AxiosResponse> {
+    return this.axios.get('/service-types/labels');
+  }
+
+  async getServiceTypeLabels(): Promise<GetServiceTypeLabelsResponse> {
+    const response = await this.getServiceTypeLabelsRaw();
+    return { data: response.data };
+  }
+
   async getServiceTypeRaw(request: GetServiceTypeRequest): Promise<AxiosResponse> {
-    return this.axios.get(`/service-types/${request.serviceTypeId}`);
+    return this.axios.get(`/service-types/${request.id}`);
   }
 
   async getServiceType(request: GetServiceTypeRequest): Promise<GetServiceTypeResponse> {
@@ -59,8 +70,7 @@ class ServiceTypeApi extends BaseApi implements ServiceTypeApiInterface {
   }
 
   async updateServiceTypeRaw(request: UpdateServiceTypeRequest): Promise<AxiosResponse> {
-    const serviceType = { ..._.pickBy(request.serviceType), status: request.serviceType.status };
-    return this.axios.put(`/service-types`, serviceType);
+    return this.axios.put(`/service-types`, request.serviceType);
   }
 
   async updateServiceType(request: UpdateServiceTypeRequest): Promise<UpdateServiceTypeResponse> {

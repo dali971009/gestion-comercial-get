@@ -1,7 +1,7 @@
 import type { ServiceType } from '@/models/service-type';
 
 export interface GetServiceTypeRequest {
-  clientId: string;
+  id: string;
 }
 
 export interface CreateServiceTypeRequest {

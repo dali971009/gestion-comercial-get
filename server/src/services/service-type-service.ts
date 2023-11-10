@@ -2,7 +2,7 @@ import httpStatus from "http-status";
 import {v4 as uuidV4} from "uuid";
 import responseHandler from "../helper/response-handler";
 import logger from "../config/logger";
-import {PrismaClient} from "@prisma/client";
+import {Prisma, PrismaClient} from "@prisma/client";
 
 export const useServiceTypeService = () => {
     const prisma = new PrismaClient();
@@ -27,7 +27,23 @@ export const useServiceTypeService = () => {
     }
 
     async function getServiceTypes() {
-        return prisma.serviceType.findMany();
+        return prisma.serviceType.findMany({
+            orderBy: {
+                name: Prisma.SortOrder.asc,
+            }
+        });
+    }
+
+    async function getServiceTypesLabels() {
+        return prisma.serviceType.findMany({
+            select: {
+                id: true,
+                name: true,
+            },
+            orderBy: {
+                name: Prisma.SortOrder.asc,
+            }
+        });
     }
 
     async function getServiceTypeByUuid(uuid: string) {
@@ -56,5 +72,13 @@ export const useServiceTypeService = () => {
         }
     }
 
-    return { createServiceType, updateServiceType, getServiceTypeByUuid, getServiceTypes }
+    async function getServiceTypeIds() {
+      return prisma.serviceType.findMany({
+        select: {
+          id: true,
+        }
+      })
+    }
+
+    return { createServiceType, updateServiceType, getServiceTypeByUuid, getServiceTypes, getServiceTypesLabels, getServiceTypeIds }
 }

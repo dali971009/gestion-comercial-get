@@ -1,0 +1,7 @@
+export enum InvoiceFrequency {
+  OCCASIONALLY,
+  MONTHLY,
+  EVERY_THREE_MONTHS,
+  EVERY_SIX_MONTHS,
+  YEARLY,
+}

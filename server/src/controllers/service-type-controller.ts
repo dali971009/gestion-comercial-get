@@ -53,5 +53,17 @@ export const useServiceTypeController = () => {
         }
     }
 
-    return { createServiceType, updateServiceType, getServiceType, getServiceTypes }
+    async function getServiceTypeLabels(req: any, res: any) {
+        try {
+            const serviceTypeLabels = await ServiceTypeService.getServiceTypesLabels();
+            const labels = serviceTypeLabels.map(it => ({ title: it.name, value: it.id }));
+            res.status(httpStatus.OK).send(labels);
+        } catch (e) {
+            logger.error(e);
+            res.status(httpStatus.BAD_GATEWAY).send(e);
+        }
+    }
+
+
+    return { createServiceType, updateServiceType, getServiceType, getServiceTypes, getServiceTypeLabels }
 }

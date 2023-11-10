@@ -4,6 +4,8 @@ enum ErrorType {
   STRING_MIN = 'string.min',
   EMAIL = 'string.email',
   PASSWORDS_MATCH = 'password.match',
+  INVALID_UUID = 'string.guid',
+  NOT_EXIST = 'any.exist',
 
   REQUIRED_IF = 'required_if',
   CHECK_RPM = 'check_rpm',

@@ -10,6 +10,26 @@
         />
       </custom-input>
     </responsive-form-field>
+    <responsive-form-field>
+      <custom-input label="Descripción">
+        <v-text-field
+          v-model="serviceType.description"
+          placeholder="Inserte la descripción"
+          :hide-details="typeof errors.description === 'undefined'"
+          :error-messages="errors.description"
+        />
+      </custom-input>
+    </responsive-form-field>
+    <responsive-form-field>
+      <custom-input label="Descripción de los servicios">
+        <v-text-field
+          v-model="serviceType.serviceDescription"
+          placeholder="Inserte la descripción de los servicios"
+          :hide-details="typeof errors.serviceDescription === 'undefined'"
+          :error-messages="errors.serviceDescription"
+        />
+      </custom-input>
+    </responsive-form-field>
   </v-form>
 </template>
 
