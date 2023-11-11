@@ -60,8 +60,7 @@ class ServiceTypeApi extends BaseApi implements ServiceTypeApiInterface {
   }
 
   async createServiceTypeRaw(request: CreateServiceTypeRequest): Promise<AxiosResponse> {
-    const serviceType = _.cloneDeep(request.serviceType);
-    return this.axios.post(`/service-types`, serviceType);
+    return this.axios.post(`/service-types`, { ..._.pickBy(request.serviceType) });
   }
 
   async createServiceType(request: CreateServiceTypeRequest): Promise<CreateServiceTypeResponse> {
@@ -70,7 +69,7 @@ class ServiceTypeApi extends BaseApi implements ServiceTypeApiInterface {
   }
 
   async updateServiceTypeRaw(request: UpdateServiceTypeRequest): Promise<AxiosResponse> {
-    return this.axios.put(`/service-types`, request.serviceType);
+    return this.axios.put(`/service-types`, { ..._.pickBy(request.serviceType) });
   }
 
   async updateServiceType(request: UpdateServiceTypeRequest): Promise<UpdateServiceTypeResponse> {

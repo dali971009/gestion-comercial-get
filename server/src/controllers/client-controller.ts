@@ -83,5 +83,16 @@ export const useClientController = () => {
         }
     }
 
-    return { createClient, updateClient, getClient, getAllClients }
+    async function getClientLabels(req: any, res: any) {
+      try {
+        const clientLabels = await clientService.getClientLabels();
+        const labels = clientLabels.map(it => ({ title: it.officialName, value: it.id }));
+        res.status(httpStatus.OK).send(labels);
+      } catch (e) {
+        logger.error(e);
+        res.status(httpStatus.BAD_GATEWAY).send(e);
+      }
+    }
+
+    return { createClient, updateClient, getClient, getAllClients, getClientLabels }
 }

@@ -1,5 +1,5 @@
 import ErrorType from '@/helpers/errors/error-types';
-import { ErrorResponse } from '@/helpers/errors/error-response';
+import { type ErrorResponse } from '@/helpers/errors/error-response';
 
 export function makeErrorMessage(errorResponse: ErrorResponse): string {
   switch (errorResponse.type) {
@@ -10,9 +10,13 @@ export function makeErrorMessage(errorResponse: ErrorResponse): string {
     case ErrorType.STRING_MIN:
       return `Este campo debe contener al menos ${errorResponse.params?.min} caracteres`;
     case ErrorType.EMAIL:
-      return 'El email no es válido';
+      return 'El correo no es válido';
     case ErrorType.PASSWORDS_MATCH:
       return 'Las contraseñas no coinciden';
+    case ErrorType.INVALID_UUID:
+      return 'Uuid inválido';
+    case ErrorType.NOT_EXIST:
+      return 'El elemento seleccionado no existe';
 
     case ErrorType.REQUIRED_IF:
       return 'This field is required';

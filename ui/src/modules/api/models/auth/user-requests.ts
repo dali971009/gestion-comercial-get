@@ -1,7 +1,7 @@
 import type { User } from '@/models/user';
 
 export interface GetUserRequest {
-  clientId: string;
+  id: string;
 }
 
 export interface CreateUserRequest {

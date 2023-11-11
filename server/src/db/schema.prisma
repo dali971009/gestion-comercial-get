@@ -44,7 +44,7 @@ model ClientContact {
 }
 
 model Client {
-  id                 String          @id @default(uuid())
+  id                 String           @id @default(uuid())
   code               String
   officialName       String
   acronym            String?
@@ -63,6 +63,7 @@ model Client {
   bankAccount        String?
   accountName        String?
   bank               String?
+  serviceRequests    ServiceRequest[]
 }
 
 model ServiceType {
@@ -82,4 +83,18 @@ model Service {
   unit             String?
   price            Decimal?
   frequency        Int?
+}
+
+model ServiceRequest {
+  id                 String   @id @default(uuid())
+  number             Int
+  applicationDate    DateTime
+  requestingEntityId String
+  requestingEntity   Client   @relation(fields: [requestingEntityId], references: [id])
+  contactName        String
+  contactPosition    String
+  contactEmail       String?
+  contactPhoneNumber String?
+  scope              String
+  status             Int
 }

@@ -44,7 +44,7 @@ const snackbarStore = useSnackBar();
 
 async function fetchUser() {
   try {
-    const response = await makeUserApi().getUser({ userId });
+    const response = await makeUserApi().getUser({ id: userId });
     user.value = response.data;
   } catch (error) {
     console.error(error);

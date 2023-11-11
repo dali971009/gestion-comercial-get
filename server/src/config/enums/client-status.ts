@@ -1,4 +1,4 @@
 export enum ClientStatus {
     ACTIVE = 1,
-    INACTIVE = 0,
+    INACTIVE = 2,
 }

@@ -6,6 +6,7 @@ import type {
   GetClientResponse,
   GetClientsResponse,
   UpdateClientResponse,
+  GetClientLabelsResponse,
 } from '@/modules/api/models/auth/clients-responses';
 import type { Client } from '@/models/client';
 import type {
@@ -18,6 +19,8 @@ export interface ClientApiInterface {
   getClientsRaw(): Promise<AxiosResponse>;
   getClients(): Promise<GetClientsResponse>;
   getClientRaw(request: GetClientRequest): Promise<AxiosResponse>;
+  getClientLabelsRaw(): Promise<AxiosResponse>;
+  getClientLabels(): Promise<GetClientLabelsResponse>;
   getClient(request: GetClientRequest): Promise<GetClientResponse>;
   createClientRaw(request: CreateClientRequest): Promise<AxiosResponse>;
   createClient(request: CreateClientRequest): Promise<CreateClientResponse>;
@@ -43,25 +46,31 @@ class ClientApi extends BaseApi implements ClientApiInterface {
     return this.axios.get(`/clients/${request.clientId}`);
   }
 
+  async getClientLabelsRaw(): Promise<AxiosResponse> {
+    return this.axios.get('/clients/labels');
+  }
+
+  async getClientLabels(): Promise<GetClientLabelsResponse> {
+    const response = await this.getClientLabelsRaw();
+    return { data: response.data };
+  }
+
   async getClient(request: GetClientRequest): Promise<GetClientResponse> {
     const response = await this.getClientRaw(request);
     return { data: response.data };
   }
 
   async createClientRaw(request: CreateClientRequest): Promise<AxiosResponse> {
-    const client = _.cloneDeep(request.client);
-    return this.axios.post(`/clients`, client);
+    return this.axios.post(`/clients`, { ..._.pickBy(request.client) });
   }
 
   async createClient(request: CreateClientRequest): Promise<CreateClientResponse> {
     const response = await this.createClientRaw(request);
-    const client: Client = response.data;
-    return { data: client };
+    return { data: response.data };
   }
 
   async updateClientRaw(request: UpdateClientRequest): Promise<AxiosResponse> {
-    const client = _.pickBy(request.client);
-    return this.axios.put(`/clients/${request.clientId}`, client);
+    return this.axios.put(`/clients/${request.clientId}`, { ..._.pickBy(request.client) });
   }
 
   async updateClient(request: UpdateClientRequest): Promise<UpdateClientResponse> {

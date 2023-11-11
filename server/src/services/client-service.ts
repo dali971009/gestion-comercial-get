@@ -12,6 +12,18 @@ export const useClientService = () => {
         return prisma.client.findMany();
     }
 
+    async function getClientLabels() {
+      return prisma.client.findMany({
+        select: {
+          id: true,
+          officialName: true,
+        },
+        orderBy: {
+          officialName: Prisma.SortOrder.asc,
+        }
+      });
+    }
+
     async function createClient(clientBody: any) {
         try {
             let message = 'Successfully created client!';
@@ -66,5 +78,13 @@ export const useClientService = () => {
         }
     }
 
-    return { getClients, createClient, getClientByUuid, updateClient }
+    async function getClientIds() {
+      return prisma.client.findMany({
+        select: {
+          id: true,
+        }
+      })
+    }
+
+    return { getClients, createClient, getClientByUuid, getClientLabels, getClientIds, updateClient }
 }

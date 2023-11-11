@@ -45,24 +45,44 @@ const items = ref<MenuItem[]>([
     routeName: RouteNames.CLIENT_LIST,
   },
   {
-    icon: 'mdi-tag',
+    icon: 'mdi-puzzle',
     title: 'Tipos de servicio',
     routeName: RouteNames.SERVICE_TYPE_LIST,
   },
   {
-    icon: 'mdi-tag',
+    icon: 'mdi-puzzle',
     title: 'Servicios',
     routeName: RouteNames.SERVICE_LIST,
   },
   {
+    icon: 'mdi-comment-account',
+    title: 'Solicitudes de servicios',
+    routeName: RouteNames.SERVICE_REQUEST_LIST,
+  },
+  {
     icon: 'mdi-tag',
-    title: 'Reportes de producción',
-    routeName: RouteNames.PRODUCTION_REPORT_LIST,
+    title: 'Ofertas comerciales',
+    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
+  },
+  {
+    icon: 'mdi-tag',
+    title: 'Proformas de contrato',
+    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
   },
   {
     icon: 'mdi-file-document-edit-outline',
     title: 'Contratos',
     routeName: RouteNames.CONTRACT_LIST,
+  },
+  {
+    icon: 'mdi-tag',
+    title: 'Suplementos',
+    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
+  },
+  {
+    icon: 'mdi-file-chart',
+    title: 'Reportes de producción',
+    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
   },
   {
     icon: 'mdi-receipt',

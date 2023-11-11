@@ -1,6 +1,6 @@
 export enum VerificationCodeStatus {
-    NOT_USED = 0,
     USED = 1,
+    NOT_USED = 2,
 }
 
 export enum VerificationCodeType {

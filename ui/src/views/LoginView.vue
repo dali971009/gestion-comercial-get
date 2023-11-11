@@ -9,6 +9,7 @@
           prepend-inner-icon="mdi-account-outline"
           style="width: 300px"
           :error-messages="errors.email"
+          @keyup.enter="login"
         />
         <v-text-field
           v-model="password"
@@ -17,6 +18,7 @@
           style="width: 300px"
           type="password"
           :error-messages="errors.password"
+          @keyup.enter="login"
         />
         <div class="d-flex justify-space-between align-center align-self-stretch mt-8 mb-2">
           <a href="#" class="text-decoration-none text-primary">¿Olvidó su contraseña?</a>

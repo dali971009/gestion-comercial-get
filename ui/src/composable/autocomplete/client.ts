@@ -1,10 +1,10 @@
 import { ref } from 'vue';
 import type { LabelResult } from '@/models/label-result';
-import { makeServiceTypeApi } from '@/modules/api/proxy';
+import { makeClientApi } from '@/modules/api/proxy';
 import type { AutocompleteFetcher } from '@/composable/autocomplete-fetcher';
 import { useSnackBar } from '@/stores';
 
-export function useServiceTypeLabel(): AutocompleteFetcher {
+export function useClientLabel(): AutocompleteFetcher {
   const items = ref<Array<LabelResult>>([]);
   const loading = ref<boolean>(false);
   const snackbar = useSnackBar();
@@ -12,13 +12,13 @@ export function useServiceTypeLabel(): AutocompleteFetcher {
   async function fetch(search?: string, ids?: Array<number>) {
     try {
       loading.value = true;
-      const response = await makeServiceTypeApi().getServiceTypeLabels();
+      const response = await makeClientApi().getClientLabels();
       items.value = response.data;
     } catch (e) {
       console.log(e);
       snackbar.push({
         color: 'error',
-        text: 'Error cargando los tipos de servicio.',
+        text: 'Error cargando los clientes.',
       });
     } finally {
       loading.value = false;

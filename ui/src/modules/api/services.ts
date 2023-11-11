@@ -48,8 +48,7 @@ class ServiceApi extends BaseApi implements ServiceApiInterface {
   }
 
   async createServiceRaw(request: CreateServiceRequest): Promise<AxiosResponse> {
-    const service = _.cloneDeep(request.service);
-    return this.axios.post(`/services`, service);
+    return this.axios.post(`/services`, { ..._.pickBy(request.service) });
   }
 
   async createService(request: CreateServiceRequest): Promise<CreateServiceResponse> {
@@ -58,11 +57,7 @@ class ServiceApi extends BaseApi implements ServiceApiInterface {
   }
 
   async updateServiceRaw(request: UpdateServiceRequest): Promise<AxiosResponse> {
-    const service = _.pickBy(request.service);
-    if (request.service.frequency) {
-      service.frequency = request.service.frequency;
-    }
-    return this.axios.put(`/services`, service);
+    return this.axios.put(`/services`, { ..._.pickBy(request.service) });
   }
 
   async updateService(request: UpdateServiceRequest): Promise<UpdateServiceResponse> {

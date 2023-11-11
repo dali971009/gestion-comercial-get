@@ -10,6 +10,8 @@ import type { ServiceTypeApiInterface } from '@/modules/api/service-types';
 import ServiceTypeApi from '@/modules/api/service-types';
 import type { ServiceApiInterface } from '@/modules/api/services';
 import ServiceApi from '@/modules/api/services';
+import type { ServiceRequestApiInterface } from '@/modules/api/service-requests';
+import ServiceRequestApi from '@/modules/api/service-requests';
 
 // @ts-ignore
 const basePath: string = import.meta.env.VITE_API_BASE_PATH;
@@ -37,4 +39,6 @@ const makeServiceTypeApi = (): ServiceTypeApiInterface => makeApiInstance(Servic
 
 const makeServiceApi = (): ServiceApiInterface => makeApiInstance(ServiceApi);
 
-export { makeAuthApi, makeClientApi, makeUserApi, makeServiceTypeApi, makeServiceApi };
+const makeServiceRequestApi = (): ServiceRequestApiInterface => makeApiInstance(ServiceRequestApi);
+
+export { makeAuthApi, makeClientApi, makeUserApi, makeServiceTypeApi, makeServiceApi, makeServiceRequestApi };

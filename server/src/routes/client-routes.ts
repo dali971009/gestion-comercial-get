@@ -8,6 +8,7 @@ const clientController = useClientController();
 const clientValidator = useClientValidator();
 
 router.get('/', clientController.getAllClients);
+router.get('/labels', clientController.getClientLabels);
 router.get('/:id', clientValidator.getClientValidator, clientController.getClient);
 router.post('/', clientValidator.createClientValidator, clientController.createClient);
 router.put('/:id', clientValidator.updateClientValidator, clientController.updateClient);

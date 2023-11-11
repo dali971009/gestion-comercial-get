@@ -86,6 +86,21 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../../modules/services/ServiceDetailsView.vue'),
       },
       {
+        path: 'service-requests',
+        name: RouteNames.SERVICE_REQUEST_LIST,
+        component: () => import('../../modules/service-request/ServiceRequestListView.vue'),
+      },
+      {
+        path: 'service-requests/new',
+        name: RouteNames.SERVICE_REQUEST_NEW,
+        component: () => import('../../modules/service-request/ServiceRequestDetailsView.vue'),
+      },
+      {
+        path: 'service-requests/:id/edit',
+        name: RouteNames.SERVICE_REQUEST_EDIT,
+        component: () => import('../../modules/service-request/ServiceRequestDetailsView.vue'),
+      },
+      {
         path: 'contracts',
         name: RouteNames.CONTRACT_LIST,
         component: () => import('../../modules/contracts/ContractListView.vue'),

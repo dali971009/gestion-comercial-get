@@ -1,6 +1,6 @@
 export enum ClientStatus {
-  ACTIVE,
-  DELETED,
+  ACTIVE = 1,
+  INACTIVE = 2,
 }
 
 export interface Contact {

@@ -1,10 +1,10 @@
 export enum UserStatus {
     ACTIVE = 1,
-    INACTIVE = 0,
-    REMOVED = 2,
+    INACTIVE = 2,
+    REMOVED = 3,
 }
 
 export enum UserEmailStatus {
-    NOT_VERIFIED = 0,
     VERIFIED = 1,
+    NOT_VERIFIED = 2,
 }

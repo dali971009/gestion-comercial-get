@@ -17,9 +17,9 @@ export interface Service {
 }
 
 export enum InvoiceFrequency {
-  OCCASIONALLY,
-  MONTHLY,
-  EVERY_THREE_MONTHS,
-  EVERY_SIX_MONTHS,
-  YEARLY,
+  OCCASIONALLY = 1,
+  MONTHLY = 2,
+  EVERY_THREE_MONTHS = 2,
+  EVERY_SIX_MONTHS = 3,
+  YEARLY = 4,
 }
