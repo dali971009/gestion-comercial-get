@@ -1,11 +1,12 @@
 import { type AxiosInstance, type AxiosResponse } from 'axios';
 import BaseApi from './base';
 import _ from 'lodash';
-import {
-  type CreateServiceResponse,
-  type GetServiceResponse,
-  type GetServicesResponse,
-  type UpdateServiceResponse,
+import type {
+  CreateServiceResponse,
+  GetServiceLabelsResponse,
+  GetServiceResponse,
+  GetServicesResponse,
+  UpdateServiceResponse,
 } from '@/modules/api/models/service/service-responses';
 import {
   type CreateServiceRequest,
@@ -16,6 +17,8 @@ import {
 export interface ServiceApiInterface {
   getServicesRaw(): Promise<AxiosResponse>;
   getServices(): Promise<GetServicesResponse>;
+  getServiceLabelsRaw(): Promise<AxiosResponse>;
+  getServiceLabels(): Promise<GetServiceLabelsResponse>;
   getServiceRaw(request: GetServiceRequest): Promise<AxiosResponse>;
   getService(request: GetServiceRequest): Promise<GetServiceResponse>;
   createServiceRaw(request: CreateServiceRequest): Promise<AxiosResponse>;
@@ -35,6 +38,15 @@ class ServiceApi extends BaseApi implements ServiceApiInterface {
 
   async getServices(): Promise<GetServicesResponse> {
     const response = await this.getServicesRaw();
+    return { data: response.data };
+  }
+
+  async getServiceLabelsRaw(): Promise<AxiosResponse> {
+    return this.axios.get('/services/labels');
+  }
+
+  async getServiceLabels(): Promise<GetServiceLabelsResponse> {
+    const response = await this.getServiceLabelsRaw();
     return { data: response.data };
   }
 

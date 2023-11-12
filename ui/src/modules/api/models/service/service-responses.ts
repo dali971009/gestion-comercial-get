@@ -4,6 +4,10 @@ export interface GetServicesResponse {
   data: ServiceGroup[];
 }
 
+export interface GetServiceLabelsResponse {
+  data: Service[];
+}
+
 export interface GetServiceResponse {
   data: Service;
 }

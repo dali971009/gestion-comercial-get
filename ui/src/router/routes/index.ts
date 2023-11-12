@@ -101,6 +101,21 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../../modules/service-request/ServiceRequestDetailsView.vue'),
       },
       {
+        path: 'commercial-offers',
+        name: RouteNames.COMMERCIAL_OFFER_LIST,
+        component: () => import('../../modules/commercial-offer/CommercialOfferListView.vue'),
+      },
+      {
+        path: 'commercial-offers/new',
+        name: RouteNames.COMMERCIAL_OFFER_NEW,
+        component: () => import('../../modules/commercial-offer/CommercialOfferDetailsView.vue'),
+      },
+      {
+        path: 'commercial-offers/:id/edit',
+        name: RouteNames.COMMERCIAL_OFFER_EDIT,
+        component: () => import('../../modules/commercial-offer/CommercialOfferDetailsView.vue'),
+      },
+      {
         path: 'contracts',
         name: RouteNames.CONTRACT_LIST,
         component: () => import('../../modules/contracts/ContractListView.vue'),

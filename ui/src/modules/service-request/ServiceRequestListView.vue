@@ -6,8 +6,6 @@
         Añadir solicitud de servicio
       </v-btn>
     </template>
-    {{ moment(`${2023}-01-02`).startOf('year').toISOString() }}
-    {{ moment(`${2023}-01-02`).endOf('year').toDate() }}
     <easy-data-table :headers="headers" :items="serviceRequests" table-class-name="data-table" border-cell hide-footer>
       <template #item-applicationDate="item">
         {{ formatDate(item.applicationDate) }}
@@ -42,6 +40,14 @@
               </router-link>
             </template>
             Editar solicitud de servicio
+          </v-tooltip>
+          <v-tooltip>
+            <template #activator="attrs">
+              <router-link :to="{ name: RouteNames.COMMERCIAL_OFFER_NEW, query: { sr: item.id } }">
+                <v-icon class="ml-2" icon="mdi-tag" color="primary" v-bind="attrs.props" />
+              </router-link>
+            </template>
+            Crear oferta comercial
           </v-tooltip>
         </div>
       </template>

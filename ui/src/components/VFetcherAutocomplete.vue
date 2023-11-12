@@ -72,7 +72,6 @@ function searchUpdated(searchTerm: string) {
 const autocomplete = ref(null);
 
 onMounted(async () => {
-  console.log(props.modelValue);
   if (typeof props.modelValue !== 'undefined') {
     await reload();
   } else {

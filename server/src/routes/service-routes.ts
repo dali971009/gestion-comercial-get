@@ -8,6 +8,7 @@ const serviceController = useServiceController();
 const serviceValidator = useServiceValidator();
 
 router.get('/', serviceController.getServices);
+router.get('/labels', serviceController.getServiceLabels);
 router.get('/:id', serviceValidator.getServiceValidator, serviceController.getService);
 router.post('/', serviceValidator.createServiceValidator, serviceController.createService);
 router.put('/', serviceValidator.updateServiceValidator, serviceController.updateService);

@@ -6,6 +6,7 @@ import userRoutes from "./user-routes";
 import serviceRequestRoutes from "./service-request-routes";
 import serviceTypeRoutes from "./service-type-routes";
 import serviceRoutes from "./service-routes";
+import commercialOfferRoutes from "./commercial-offer-routes";
 
 const router = express.Router();
 
@@ -33,6 +34,10 @@ const defaultRoutes = [
     {
         path: '/service-requests',
         route: serviceRequestRoutes,
+    },
+    {
+        path: '/commercial-offers',
+        route: commercialOfferRoutes,
     },
 ];
 

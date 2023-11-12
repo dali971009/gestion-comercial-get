@@ -12,6 +12,8 @@ import type { ServiceApiInterface } from '@/modules/api/services';
 import ServiceApi from '@/modules/api/services';
 import type { ServiceRequestApiInterface } from '@/modules/api/service-requests';
 import ServiceRequestApi from '@/modules/api/service-requests';
+import type { CommercialOfferApiInterface } from '@/modules/api/commercial-offers';
+import CommercialOfferApi from '@/modules/api/commercial-offers';
 
 // @ts-ignore
 const basePath: string = import.meta.env.VITE_API_BASE_PATH;
@@ -41,4 +43,14 @@ const makeServiceApi = (): ServiceApiInterface => makeApiInstance(ServiceApi);
 
 const makeServiceRequestApi = (): ServiceRequestApiInterface => makeApiInstance(ServiceRequestApi);
 
-export { makeAuthApi, makeClientApi, makeUserApi, makeServiceTypeApi, makeServiceApi, makeServiceRequestApi };
+const makeCommercialOfferApi = (): CommercialOfferApiInterface => makeApiInstance(CommercialOfferApi);
+
+export {
+  makeAuthApi,
+  makeClientApi,
+  makeUserApi,
+  makeServiceTypeApi,
+  makeServiceApi,
+  makeServiceRequestApi,
+  makeCommercialOfferApi,
+};

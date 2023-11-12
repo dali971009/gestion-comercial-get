@@ -62,7 +62,7 @@ const items = ref<MenuItem[]>([
   {
     icon: 'mdi-tag',
     title: 'Ofertas comerciales',
-    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
+    routeName: RouteNames.COMMERCIAL_OFFER_LIST,
   },
   {
     icon: 'mdi-tag',

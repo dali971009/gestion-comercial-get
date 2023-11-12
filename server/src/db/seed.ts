@@ -4,6 +4,7 @@ import {UserEmailStatus, UserStatus} from "../config/enums/user-status";
 import bcrypt from "bcryptjs";
 import {ClientStatus} from "../config/enums/client-status";
 import { serviceTypeData } from './seeders/service-type-seeder'
+import {serviceRequestData} from "./seeders/service-request-seeder";
 
 const prisma = new PrismaClient()
 
@@ -60,13 +61,19 @@ async function main() {
         const user = await prisma.user.create({ data });
         console.log(`Created user with id: ${user.id}`);
     }
+    const clientIds = []
     for (const data of clientData) {
         const client = await prisma.client.create({ data });
+        clientIds.push(client.id);
         console.log(`Created client with id: ${client.id}`);
     }
     for (const data of serviceTypeData) {
         const serviceType = await prisma.serviceType.create({ data });
         console.log(`Created service type with id: ${serviceType.id}`);
+    }
+    for (const data of serviceRequestData(clientIds[0])) {
+        const serviceRequest = await prisma.serviceRequest.create({ data });
+        console.log(`Created service request with id: ${serviceRequest.id}`);
     }
 
     console.log(`Seeding finished.`)

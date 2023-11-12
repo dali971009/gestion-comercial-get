@@ -52,5 +52,26 @@ export const useServiceController = () => {
         }
     }
 
-    return { createService, updateService, getService, getServices }
+    async function getServiceLabels(req: any, res: any) {
+        try {
+            const services = await serviceService.getServices();
+            const serviceLabels = [];
+            for (const serviceType of services) {
+                for (const service of serviceType.services) {
+                    if (serviceType.serviceDescription) {
+                        service.description = `${serviceType.description}: ${serviceType.serviceDescription} (${service.description})`;
+                    } else {
+                        service.description = `${serviceType.description}: ${service.description}`;
+                    }
+                    serviceLabels.push(service);
+                }
+            }
+            res.status(httpStatus.OK).send(serviceLabels);
+        } catch (e) {
+            logger.error(e);
+            res.status(httpStatus.BAD_GATEWAY).send(e);
+        }
+    }
+
+    return { createService, updateService, getService, getServices, getServiceLabels }
 }
