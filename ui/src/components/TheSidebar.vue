@@ -65,19 +65,9 @@ const items = ref<MenuItem[]>([
     routeName: RouteNames.COMMERCIAL_OFFER_LIST,
   },
   {
-    icon: 'mdi-tag',
-    title: 'Proformas de contrato',
-    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
-  },
-  {
     icon: 'mdi-file-document-edit-outline',
     title: 'Contratos',
     routeName: RouteNames.CONTRACT_LIST,
-  },
-  {
-    icon: 'mdi-tag',
-    title: 'Suplementos',
-    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
   },
   {
     icon: 'mdi-file-chart',
