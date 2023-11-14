@@ -60,7 +60,7 @@ class ServiceRequestApi extends BaseApi implements ServiceRequestApiInterface {
   }
 
   async createServiceRequestRaw(request: CreateServiceRequestRequest): Promise<AxiosResponse> {
-    return this.axios.post(`/service-requests`, { ..._.pickBy(request.serviceRequest) });
+    return this.axios.post(`/service-requests`, { ..._.omitBy(request.serviceRequest, _.isNil) });
   }
 
   async createServiceRequest(request: CreateServiceRequestRequest): Promise<CreateServiceRequestResponse> {
@@ -69,7 +69,7 @@ class ServiceRequestApi extends BaseApi implements ServiceRequestApiInterface {
   }
 
   async updateServiceRequestRaw(request: UpdateServiceRequestRequest): Promise<AxiosResponse> {
-    return this.axios.put(`/service-requests`, { ..._.pickBy(request.serviceRequest) });
+    return this.axios.put(`/service-requests`, { ..._.omitBy(request.serviceRequest, _.isNil) });
   }
 
   async updateServiceRequest(request: UpdateServiceRequestRequest): Promise<UpdateServiceRequestResponse> {

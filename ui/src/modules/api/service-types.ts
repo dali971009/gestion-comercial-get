@@ -60,7 +60,7 @@ class ServiceTypeApi extends BaseApi implements ServiceTypeApiInterface {
   }
 
   async createServiceTypeRaw(request: CreateServiceTypeRequest): Promise<AxiosResponse> {
-    return this.axios.post(`/service-types`, { ..._.pickBy(request.serviceType) });
+    return this.axios.post(`/service-types`, { ..._.omitBy(request.serviceType, _.isNil) });
   }
 
   async createServiceType(request: CreateServiceTypeRequest): Promise<CreateServiceTypeResponse> {
@@ -69,7 +69,7 @@ class ServiceTypeApi extends BaseApi implements ServiceTypeApiInterface {
   }
 
   async updateServiceTypeRaw(request: UpdateServiceTypeRequest): Promise<AxiosResponse> {
-    return this.axios.put(`/service-types`, { ..._.pickBy(request.serviceType) });
+    return this.axios.put(`/service-types`, { ..._.omitBy(request.serviceType, _.isNil) });
   }
 
   async updateServiceType(request: UpdateServiceTypeRequest): Promise<UpdateServiceTypeResponse> {

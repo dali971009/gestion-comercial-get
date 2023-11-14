@@ -61,7 +61,7 @@ class ClientApi extends BaseApi implements ClientApiInterface {
   }
 
   async createClientRaw(request: CreateClientRequest): Promise<AxiosResponse> {
-    return this.axios.post(`/clients`, { ..._.pickBy(request.client) });
+    return this.axios.post(`/clients`, { ..._.omitBy(request.client, _.isNil) });
   }
 
   async createClient(request: CreateClientRequest): Promise<CreateClientResponse> {
@@ -70,7 +70,7 @@ class ClientApi extends BaseApi implements ClientApiInterface {
   }
 
   async updateClientRaw(request: UpdateClientRequest): Promise<AxiosResponse> {
-    return this.axios.put(`/clients/${request.clientId}`, { ..._.pickBy(request.client) });
+    return this.axios.put(`/clients/${request.clientId}`, { ..._.omitBy(request.client, _.isNil) });
   }
 
   async updateClient(request: UpdateClientRequest): Promise<UpdateClientResponse> {

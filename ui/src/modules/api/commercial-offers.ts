@@ -60,7 +60,7 @@ class CommercialOfferApi extends BaseApi implements CommercialOfferApiInterface 
   }
 
   async createCommercialOfferRaw(request: CreateCommercialOfferRequest): Promise<AxiosResponse> {
-    return this.axios.post(`/commercial-offers`, { ..._.pickBy(request.commercialOffer) });
+    return this.axios.post(`/commercial-offers`, { ..._.omitBy(request.commercialOffer, _.isNil) });
   }
 
   async createCommercialOffer(request: CreateCommercialOfferRequest): Promise<CreateCommercialOfferResponse> {
@@ -69,7 +69,7 @@ class CommercialOfferApi extends BaseApi implements CommercialOfferApiInterface 
   }
 
   async updateCommercialOfferRaw(request: UpdateCommercialOfferRequest): Promise<AxiosResponse> {
-    return this.axios.put(`/commercial-offers`, { ..._.pickBy(request.commercialOffer) });
+    return this.axios.put(`/commercial-offers`, { ..._.omitBy(request.commercialOffer, _.isNil) });
   }
 
   async updateCommercialOffer(request: UpdateCommercialOfferRequest): Promise<UpdateCommercialOfferResponse> {

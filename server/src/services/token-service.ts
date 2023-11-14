@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, {TokenExpiredError} from "jsonwebtoken";
 import moment, {Moment} from "moment";
 import config from "../config/config";
 import {TokenType} from "../config/enums/token-type";
@@ -33,7 +33,11 @@ export const useTokenService = () => {
     async function verifyToken(token: string, type: string) {
         const payload: any = jwt.verify(token, config.jwt.secret, function (err: any, decoded: any) {
             if (err) {
-                throw new Error('Token not found');
+                if (err instanceof TokenExpiredError) {
+                    throw err;
+                } else {
+                    throw new Error('Token not found');
+                }
             } else {
                 // if everything is good, save to request for use in other routes
                 return decoded;

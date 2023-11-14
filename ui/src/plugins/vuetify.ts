@@ -21,6 +21,11 @@ export default createVuetify({
     VCheckbox: {
       density: 'compact',
     },
+    VSwitch: {
+      density: 'compact',
+      color: 'primary',
+      inset: true,
+    },
     VBtn: {
       color: 'primary',
     },

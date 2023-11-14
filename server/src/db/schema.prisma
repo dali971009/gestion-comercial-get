@@ -9,6 +9,7 @@ generator client {
 
 model User {
   id            String   @id @default(uuid())
+  number        Int      @default(autoincrement())
   createAt      DateTime @default(now())
   firstName     String
   lastName      String
@@ -16,8 +17,8 @@ model User {
   password      String
   status        Int
   emailVerified Int
-  address       String
-  phoneNumber   String
+  address       String?
+  phoneNumber   String?
   token         Token[]
 }
 
@@ -33,6 +34,7 @@ model Token {
 
 model ClientContact {
   id          String  @id @default(uuid())
+  number      Int     @default(autoincrement())
   fullName    String
   ci          String
   position    String
@@ -65,10 +67,12 @@ model Client {
   bank               String?
   serviceRequests    ServiceRequest[]
   commercialOffers   CommercialOffer[]
+  contracts          Contract[]
 }
 
 model ServiceType {
   id                 String    @id @default(uuid())
+  number             Int       @default(autoincrement())
   name               String
   description        String?
   serviceDescription String?
@@ -77,6 +81,7 @@ model ServiceType {
 
 model Service {
   id                       String                   @id @default(uuid())
+  number                   Int                      @default(autoincrement())
   typeId                   String
   description              String
   extraDescription         String?
@@ -104,6 +109,7 @@ model ServiceRequest {
 
 model CommercialOffer {
   id                  String                   @id @default(uuid())
+  number              Int                      @default(autoincrement())
   serviceRequestId    String?
   serviceRequest      ServiceRequest?          @relation(fields: [serviceRequestId], references: [id])
   clientId            String
@@ -115,10 +121,52 @@ model CommercialOffer {
 
 model CommercialOfferService {
   id                String          @id @default(uuid())
+  number            Int             @default(autoincrement())
   serviceId         String
   service           Service         @relation(fields: [serviceId], references: [id])
   quantity          Int
   price             Decimal
   commercialOfferId String
   commercialOffer   CommercialOffer @relation(fields: [commercialOfferId], references: [id])
+}
+
+model Contract {
+  id                       String               @id @default(uuid())
+  number                   Int                  @default(autoincrement())
+  createAt                 DateTime            @default(now())
+  clientId                 String
+  client                   Client               @relation(fields: [clientId], references: [id])
+  identificationOfTheParts String
+  object                   String
+  value                    Decimal
+  type                     Int
+  includeCL                Boolean              @default(false)
+  agreedAdvance            Decimal?
+  wayToPay                 Int
+  signatureDate            DateTime?
+  validity                 DateTime?
+  legalOpinion             String?
+  agreement                String?
+  observations             String?
+  isPreform                Boolean
+  oldVersions              ContractOldVersion[]
+}
+
+model ContractOldVersion {
+  id                       String   @id @default(uuid())
+  contractId               String
+  contract                 Contract @relation(fields: [contractId], references: [id])
+  createAt                 DateTime
+  identificationOfTheParts String
+  object                   String
+  value                    Decimal
+  type                     Int
+  includeCL                Boolean
+  agreedAdvance            Decimal
+  wayToPay                 Int
+  signatureDate            DateTime
+  validity                 DateTime
+  legalOpinion             String?
+  agreement                String?
+  observations             String?
 }

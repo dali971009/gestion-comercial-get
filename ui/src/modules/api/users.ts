@@ -46,7 +46,7 @@ class UserApi extends BaseApi implements UserApiInterface {
 
   async createUserRaw(request: CreateUserRequest): Promise<AxiosResponse> {
     const user = _.cloneDeep(request.user);
-    return this.axios.post(`/users`, { ..._.pickBy(request.user) });
+    return this.axios.post(`/users`, { ..._.omitBy(request.user, _.isNil) });
   }
 
   async createUser(request: CreateUserRequest): Promise<CreateUserResponse> {
@@ -56,7 +56,7 @@ class UserApi extends BaseApi implements UserApiInterface {
   }
 
   async updateUserRaw(request: UpdateUserRequest): Promise<AxiosResponse> {
-    return this.axios.put(`/users`, { ..._.pickBy(request.user) });
+    return this.axios.put(`/users`, { ..._.omitBy(request.user, _.isNil) });
   }
 
   async updateUser(request: UpdateUserRequest): Promise<UpdateUserResponse> {

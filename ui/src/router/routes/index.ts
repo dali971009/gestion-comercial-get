@@ -121,6 +121,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../../modules/contracts/ContractListView.vue'),
       },
       {
+        path: 'contracts/new',
+        name: RouteNames.CONTRACT_NEW,
+        component: () => import('../../modules/contracts/ContractDetailsView.vue'),
+      },
+      {
+        path: 'contracts/:id/edit',
+        name: RouteNames.CONTRACT_EDIT,
+        component: () => import('../../modules/contracts/ContractDetailsView.vue'),
+      },
+      {
         path: 'invoices',
         name: RouteNames.INVOICE_LIST,
         component: () => import('../../modules/invoices/InvoiceListView.vue'),

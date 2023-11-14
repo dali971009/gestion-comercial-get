@@ -10,7 +10,7 @@ export const useAuthController = () => {
     const userService = useUserService();
     const tokenService = useTokenService();
     const authService = useAuthService();
-    
+
     async function register(req: any, res: any) {
         try {
             const user = await userService.createUser(req.body);
@@ -116,7 +116,7 @@ export const useAuthController = () => {
             );
             const refreshTokenDoc = await tokenService.verifyToken(
                 refreshToken,
-                TokenType.ACCESS,
+                TokenType.REFRESH,
             );
             await tokenService.removeTokenById(accessTokenDoc.id);
             await tokenService.removeTokenById(refreshTokenDoc.id);

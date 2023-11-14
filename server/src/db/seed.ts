@@ -52,6 +52,11 @@ async function main() {
     console.log(`Start seeding ...`)
     await prisma.token.deleteMany();
     await prisma.user.deleteMany();
+    await prisma.commercialOfferService.deleteMany();
+    await prisma.commercialOffer.deleteMany()
+    await prisma.serviceRequest.deleteMany();
+    await prisma.contractOldVersion.deleteMany();
+    await prisma.contract.deleteMany();
     await prisma.clientContact.deleteMany();
     await prisma.client.deleteMany();
     await prisma.service.deleteMany();

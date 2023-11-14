@@ -21,7 +21,7 @@
       <custom-input label="Forma de pago" required>
         <v-autocomplete
           v-model="commercialOffer.wayToPay"
-          placeholder="Seleccione el estado de la solicitud"
+          placeholder="Seleccione la forma de pago"
           :items="waysToPay"
           :hide-details="typeof errors.wayToPay === 'undefined'"
           :error-messages="errors.wayToPay"
