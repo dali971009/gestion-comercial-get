@@ -84,5 +84,10 @@ export default defineStore('auth', {
         return error.status === 403;
       }
     },
+    async logout() {
+      Cookies.remove(CookieNames.ACCESS_TOKEN);
+      Cookies.remove(CookieNames.REFRESH_TOKEN);
+      localStorage.removeItem('user');
+    },
   },
 });

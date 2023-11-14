@@ -1,10 +1,10 @@
 <template>
   <header>
     <v-app-bar elevation="0" density="compact" class="bg-primary">
-      <v-app-bar-nav-icon color="grey-darken-4" @click="$emit('nav-icon-pressed')" />
+      <v-app-bar-nav-icon color="white" @click="$emit('nav-icon-pressed')" />
       <v-app-bar-title class="ma-0">
-        <router-link :to="{ name: RouteNames.DASHBOARD }" class="text-grey-darken-4 text-decoration-none">
-          Gestión comercial
+        <router-link :to="{ name: RouteNames.DASHBOARD }" class="text-white text-decoration-none">
+          <b>Gestión comercial</b>
         </router-link>
       </v-app-bar-title>
       <v-spacer />

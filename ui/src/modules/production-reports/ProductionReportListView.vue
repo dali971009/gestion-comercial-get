@@ -1,6 +1,7 @@
 <template>
   <page-view title="Reportes de producción" :use-card="false">
-    <template #actions>
+    <v-alert color="warning" icon="mdi-information">Por hacer</v-alert>
+    <!--<template #actions>
       <v-btn class="text-subtitle-1" :to="{ name: RouteNames.PRODUCTION_REPORT_NEW }" rounded>
         <v-icon icon="mdi-plus" class="mr-2" />
         Añadir reporte
@@ -27,12 +28,12 @@
           </v-btn>
         </div>
       </template>
-    </easy-data-table>
+    </easy-data-table>-->
   </page-view>
 </template>
 
 <script setup lang="ts">
-import { RouteNames } from '@/router/route-names';
+import RouteNames from '@/router/route-names';
 import PageView from '@/components/PageView.vue';
 import { useProductionReportsStore } from '@/stores/production-reports';
 import { Header } from 'vue3-easy-data-table';

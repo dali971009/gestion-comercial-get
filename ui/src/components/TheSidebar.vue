@@ -72,7 +72,7 @@ const items = ref<MenuItem[]>([
   {
     icon: 'mdi-file-chart',
     title: 'Reportes de producción',
-    // routeName: RouteNames.PRODUCTION_REPORT_LIST,
+    routeName: RouteNames.PRODUCTION_REPORT_LIST,
   },
   {
     icon: 'mdi-receipt',

@@ -133,7 +133,7 @@ model CommercialOfferService {
 model Contract {
   id                       String               @id @default(uuid())
   number                   Int                  @default(autoincrement())
-  createAt                 DateTime            @default(now())
+  createAt                 DateTime             @default(now())
   clientId                 String
   client                   Client               @relation(fields: [clientId], references: [id])
   identificationOfTheParts String
