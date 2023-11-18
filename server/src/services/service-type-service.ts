@@ -1,84 +1,91 @@
-import httpStatus from "http-status";
-import {v4 as uuidV4} from "uuid";
-import responseHandler from "../helper/response-handler";
-import logger from "../config/logger";
-import {Prisma, PrismaClient} from "@prisma/client";
+import httpStatus from 'http-status';
+import { v4 as uuidV4 } from 'uuid';
+import responseHandler from '../helper/response-handler';
+import logger from '../config/logger';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 export const useServiceTypeService = () => {
-    const prisma = new PrismaClient();
+  const prisma = new PrismaClient();
 
-    async function createServiceType(serviceTypeBody: any) {
-        try {
-            serviceTypeBody.id = uuidV4();
+  async function createServiceType(serviceTypeBody: any) {
+    try {
+      serviceTypeBody.id = uuidV4();
 
-            let serviceTypeData = await prisma.serviceType.create({
-                data: serviceTypeBody
-            });
+      let serviceTypeData = await prisma.serviceType.create({
+        data: serviceTypeBody,
+      });
 
-            if (!serviceTypeData) {
-                return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
-            }
+      if (!serviceTypeData) {
+        return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
+      }
 
-            return responseHandler.returnSuccess(httpStatus.CREATED, 'success', serviceTypeData);
-        } catch (e) {
-            logger.error(e);
-            return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
-        }
+      return responseHandler.returnSuccess(httpStatus.CREATED, 'success', serviceTypeData);
+    } catch (e) {
+      logger.error(e);
+      return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
     }
+  }
 
-    async function getServiceTypes() {
-        return prisma.serviceType.findMany({
-            orderBy: {
-                name: Prisma.SortOrder.asc,
-            }
-        });
+  async function getServiceTypes() {
+    return prisma.serviceType.findMany({
+      orderBy: {
+        name: Prisma.SortOrder.asc,
+      },
+    });
+  }
+
+  async function getServiceTypesLabels() {
+    return prisma.serviceType.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+      orderBy: {
+        name: Prisma.SortOrder.asc,
+      },
+    });
+  }
+
+  async function getServiceTypeByUuid(uuid: string) {
+    return prisma.serviceType.findUnique({
+      where: {
+        id: uuid,
+      },
+    });
+  }
+
+  async function updateServiceType(serviceTypeBody: any) {
+    try {
+      let serviceTypeData = await prisma.serviceType.update({
+        data: serviceTypeBody,
+        where: {
+          id: serviceTypeBody.id,
+        },
+      });
+      if (!serviceTypeData) {
+        return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
+      }
+      return responseHandler.returnSuccess(httpStatus.OK, 'success', serviceTypeData);
+    } catch (e) {
+      logger.error(e);
+      return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
     }
+  }
 
-    async function getServiceTypesLabels() {
-        return prisma.serviceType.findMany({
-            select: {
-                id: true,
-                name: true,
-            },
-            orderBy: {
-                name: Prisma.SortOrder.asc,
-            }
-        });
-    }
+  async function getServiceTypeIds() {
+    return prisma.serviceType.findMany({
+      select: {
+        id: true,
+      },
+    });
+  }
 
-    async function getServiceTypeByUuid(uuid: string) {
-        return prisma.serviceType.findUnique({
-            where: {
-                id: uuid,
-            },
-        });
-    }
-
-    async function updateServiceType(serviceTypeBody: any) {
-        try {
-            let serviceTypeData = await prisma.serviceType.update({
-                data: serviceTypeBody,
-                where: {
-                    id: serviceTypeBody.id,
-                }
-            });
-            if (!serviceTypeData) {
-                return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
-            }
-            return responseHandler.returnSuccess(httpStatus.OK, 'success', serviceTypeData);
-        } catch (e) {
-            logger.error(e);
-            return responseHandler.returnError(httpStatus.INTERNAL_SERVER_ERROR, 'failed');
-        }
-    }
-
-    async function getServiceTypeIds() {
-      return prisma.serviceType.findMany({
-        select: {
-          id: true,
-        }
-      })
-    }
-
-    return { createServiceType, updateServiceType, getServiceTypeByUuid, getServiceTypes, getServiceTypesLabels, getServiceTypeIds }
-}
+  return {
+    createServiceType,
+    updateServiceType,
+    getServiceTypeByUuid,
+    getServiceTypes,
+    getServiceTypesLabels,
+    getServiceTypeIds,
+  };
+};

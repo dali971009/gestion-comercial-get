@@ -1,7 +1,7 @@
-import express from "express";
-import {auth} from "../middlewares/auth";
-import {useClientValidator} from "../validators/client-validator";
-import {useClientController} from "../controllers/client-controller";
+import express from 'express';
+import { auth } from '../middlewares/auth';
+import { useClientValidator } from '../validators/client-validator';
+import { useClientController } from '../controllers/client-controller';
 
 const router = express.Router();
 const clientController = useClientController();

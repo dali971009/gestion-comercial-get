@@ -1,7 +1,7 @@
-import {Prisma} from "@prisma/client";
-import {v4 as uuidv4} from "uuid";
-import moment from "moment";
-import {ServiceRequestStatus} from "../../config/enums/service-request-status";
+import { Prisma } from '@prisma/client';
+import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
+import { ServiceRequestStatus } from '../../config/enums/service-request-status';
 
 export function serviceRequestData(clientId: string): Prisma.ServiceRequestCreateInput[] {
   return [
@@ -17,8 +17,8 @@ export function serviceRequestData(clientId: string): Prisma.ServiceRequestCreat
       requestingEntity: {
         connect: {
           id: clientId,
-        }
-      }
+        },
+      },
     },
   ];
 }

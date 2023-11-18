@@ -1,7 +1,7 @@
-import express from "express";
-import { useAuthController } from "../controllers/auth-controller";
-import { useUserValidator } from "../validators/user-validator";
-import {auth} from "../middlewares/auth";
+import express from 'express';
+import { useAuthController } from '../controllers/auth-controller';
+import { useUserValidator } from '../validators/user-validator';
+import { auth } from '../middlewares/auth';
 
 const router = express.Router();
 const authController = useAuthController();
@@ -12,11 +12,6 @@ router.post('/refresh-token', authController.refreshTokens);
 router.post('/check-token', authController.checkToken);
 router.post('/remove-token', authController.removeTokens);
 router.post('/logout', authController.logout);
-router.put(
-    '/change-password',
-    auth(),
-    userValidator.changePasswordValidator,
-    authController.changePassword,
-);
+router.put('/change-password', auth(), userValidator.changePasswordValidator, authController.changePassword);
 
 export default router;

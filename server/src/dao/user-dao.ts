@@ -1,21 +1,21 @@
-import {PrismaClient} from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 class UserDao {
-    private prismaClient: PrismaClient;
+  private prismaClient: PrismaClient;
 
-    constructor() {
-        this.prismaClient = new PrismaClient();
-    }
+  constructor() {
+    this.prismaClient = new PrismaClient();
+  }
 
-    async findByEmail(email: string) {
-        return this.prismaClient.user.findUnique({
-            where: {
-                email
-            }
-        });
-    }
+  async findByEmail(email: string) {
+    return this.prismaClient.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  }
 
-    /* async isEmailExists(email: string) {
+  /* async isEmailExists(email: string) {
         return User.count({ where: { email } }).then((count: number) => {
             if (count != 0) {
                 return true;
@@ -24,7 +24,7 @@ class UserDao {
         });
     }*/
 
-    /* async createWithTransaction(user: any, transaction: any) {
+  /* async createWithTransaction(user: any, transaction: any) {
         return User.create(user, { transaction });
     }*/
 }

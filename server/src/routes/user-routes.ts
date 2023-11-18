@@ -1,7 +1,7 @@
-import express from "express";
-import {auth} from "../middlewares/auth";
-import {useUserValidator} from "../validators/user-validator";
-import {useUserController} from "../controllers/user-controller";
+import express from 'express';
+import { auth } from '../middlewares/auth';
+import { useUserValidator } from '../validators/user-validator';
+import { useUserController } from '../controllers/user-controller';
 
 const router = express.Router();
 const userController = useUserController();

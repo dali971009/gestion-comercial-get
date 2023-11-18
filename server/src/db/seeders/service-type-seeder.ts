@@ -1,6 +1,6 @@
-import {Prisma} from "@prisma/client";
-import {v4 as uuidv4} from "uuid";
-import {InvoiceFrequency} from "../../config/enums/service-invoice-frequency";
+import { Prisma } from '@prisma/client';
+import { v4 as uuidv4 } from 'uuid';
+import { InvoiceFrequency } from '../../config/enums/service-invoice-frequency';
 
 export const serviceTypeData: Prisma.ServiceTypeCreateInput[] = [
   {
@@ -37,8 +37,8 @@ export const serviceTypeData: Prisma.ServiceTypeCreateInput[] = [
             frequency: InvoiceFrequency.MONTHLY,
           },
         ],
-      }
-    }
+      },
+    },
   },
   {
     id: uuidv4(),
@@ -98,8 +98,8 @@ export const serviceTypeData: Prisma.ServiceTypeCreateInput[] = [
             frequency: InvoiceFrequency.MONTHLY,
           },
         ],
-      }
-    }
+      },
+    },
   },
   {
     id: uuidv4(),
@@ -108,52 +108,46 @@ export const serviceTypeData: Prisma.ServiceTypeCreateInput[] = [
     services: {
       createMany: {
         data: [
-            {
-                id: uuidv4(),
-                description: 'Instalación y activación del servidor VPS (Cuota única)',
-                price: 538.92,
-                frequency: InvoiceFrequency.MONTHLY,
-            },
-            {
-                id: uuidv4(),
-                description: 'Hospedaje de servidor virtual dedicado (Tarifa igual al 15% Configuración VPS)',
-                frequency: InvoiceFrequency.MONTHLY,
-            },
+          {
+            id: uuidv4(),
+            description: 'Instalación y activación del servidor VPS (Cuota única)',
+            price: 538.92,
+            frequency: InvoiceFrequency.MONTHLY,
+          },
+          {
+            id: uuidv4(),
+            description: 'Hospedaje de servidor virtual dedicado (Tarifa igual al 15% Configuración VPS)',
+            frequency: InvoiceFrequency.MONTHLY,
+          },
         ],
-      }
-    }
+      },
+    },
   },
   {
     id: uuidv4(),
     name: 'Video conferencia',
     services: {
       createMany: {
-        data: [
-
-        ],
-      }
-    }
+        data: [],
+      },
+    },
   },
   {
     id: uuidv4(),
     name: 'Seguridad informática',
     services: {
       createMany: {
-        data: [
-
-        ],
-      }
-    }
+        data: [],
+      },
+    },
   },
   {
     id: uuidv4(),
     name: 'Asistencia técnica especializada',
     services: {
       createMany: {
-        data: [
-
-        ],
-      }
-    }
+        data: [],
+      },
+    },
   },
-]
+];

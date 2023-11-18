@@ -1,7 +1,7 @@
-import express from "express";
-import {auth} from "../middlewares/auth";
-import {useServiceValidator} from "../validators/service-validator";
-import {useServiceController} from "../controllers/service-controller";
+import express from 'express';
+import { auth } from '../middlewares/auth';
+import { useServiceValidator } from '../validators/service-validator';
+import { useServiceController } from '../controllers/service-controller';
 
 const router = express.Router();
 const serviceController = useServiceController();
