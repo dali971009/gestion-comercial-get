@@ -21,7 +21,7 @@
           @keyup.enter="login"
         />
         <div class="d-flex justify-space-between align-center align-self-stretch mt-8 mb-2">
-          <a href="#" class="text-decoration-none text-primary">¿Olvidó su contraseña?</a>
+          <a href="#" class="text-decoration-none text-primary"><!--¿Olvidó su contraseña?--></a>
           <v-btn @click.prevent="login" rounded="8" :disabled="isLoading">
             <template v-if="isLoading" #prepend>
               <v-progress-circular size="14" width="2" indeterminate />
@@ -30,7 +30,16 @@
           </v-btn>
         </div>
       </v-form>
-      <div class="flex-1-0 bg-primary"></div>
+      <div class="flex-1-0 d-flex flex-column justify-center align-center bg-primary">
+        <h1 style="font-size: 64px" class="mb-n2">GET</h1>
+        <p align="center">
+          <b>
+            Grupo de Electrónica
+            <br />
+            para el Turismo
+          </b>
+        </p>
+      </div>
     </v-card>
   </div>
 </template>
@@ -69,7 +78,7 @@ async function login() {
       .catch(error => {
         throw error;
       });
-    await router.push({ name: RouteNames.DASHBOARD });
+    await router.push({ name: RouteNames.CLIENT_LIST });
   } catch (error: any) {
     if (!errorHandler.handleErrorResponse(error)) {
       if (error instanceof AxiosError && error.response?.status === 400) {
