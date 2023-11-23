@@ -122,5 +122,14 @@ export const useContractValidator = () => {
     }
   }
 
-  return { contractCreateValidator, getContractValidator, updateContractValidator };
+  async function printContractValidator(req: any, res: any, next: any) {
+    const { error, value } = Joi.string().uuid().validate(req.params.id);
+    if (error) {
+      next(new ApiError(httpStatus.BAD_REQUEST, 'uuid.incorrect'));
+    } else {
+      next();
+    }
+  }
+
+  return { contractCreateValidator, getContractValidator, updateContractValidator, printContractValidator };
 };

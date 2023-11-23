@@ -15,3 +15,7 @@ export interface CreateContractResponse {
 export interface UpdateContractResponse {
   data: Contract;
 }
+
+export interface PrintContractResponse {
+  data: string;
+}

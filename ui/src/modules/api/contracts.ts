@@ -5,6 +5,7 @@ import type {
   CreateContractResponse,
   GetContractResponse,
   GetContractsResponse,
+  PrintContractResponse,
   UpdateContractResponse,
 } from '@/modules/api/models/contract/contract-responses';
 import type {
@@ -18,6 +19,8 @@ export interface ContractApiInterface {
   getContracts(): Promise<GetContractsResponse>;
   getContractRaw(request: GetContractRequest): Promise<AxiosResponse>;
   getContract(request: GetContractRequest): Promise<GetContractResponse>;
+  printContractRaw(request: GetContractRequest): Promise<AxiosResponse>;
+  printContract(request: GetContractRequest): Promise<PrintContractResponse>;
   createContractRaw(request: CreateContractRequest): Promise<AxiosResponse>;
   createContract(request: CreateContractRequest): Promise<CreateContractResponse>;
   updateContractRaw(request: UpdateContractRequest): Promise<AxiosResponse>;
@@ -44,6 +47,16 @@ class ContractApi extends BaseApi implements ContractApiInterface {
 
   async getContract(request: GetContractRequest): Promise<GetContractResponse> {
     const response = await this.getContractRaw(request);
+    return { data: response.data };
+  }
+
+  async printContractRaw(request: GetContractRequest): Promise<AxiosResponse> {
+    return this.axios.get(`/contracts/${request.id}/pdf`);
+  }
+
+  async printContract(request: GetContractRequest): Promise<PrintContractResponse> {
+    const response = await this.printContractRaw(request);
+    console.log(response);
     return { data: response.data };
   }
 

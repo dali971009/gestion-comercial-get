@@ -11,5 +11,6 @@ router.get('/', contractController.getContracts);
 router.get('/:id', contractValidator.getContractValidator, contractController.getContract);
 router.post('/', contractValidator.contractCreateValidator, contractController.createContract);
 router.put('/', contractValidator.updateContractValidator, contractController.updateContract);
+router.get('/:id/pdf', contractValidator.printContractValidator, contractController.printContract);
 
 export default router;

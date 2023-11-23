@@ -48,6 +48,14 @@
             </template>
             {{ item.isPreform ? 'Editar contrato' : 'Crear suplemento' }}
           </v-tooltip>
+          <v-tooltip>
+            <template #activator="attrs">
+              <router-link :to="{ name: RouteNames.CONTRACT_PRINT, params: { id: item.id } }">
+                <v-icon class="ml-2" icon="mdi-printer" color="primary" v-bind="attrs.props" />
+              </router-link>
+            </template>
+            Imprimir contrato
+          </v-tooltip>
         </div>
       </template>
     </easy-data-table>

@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.3.1",
+    "@vue/server-renderer": "^3.3.8",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -26,9 +27,12 @@
     "node-cron": "^3.0.2",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
+    "pdf-lib": "^1.17.1",
+    "pdfkit": "^0.14.0",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "socket.io": "^4.7.2",
+    "vue-server-renderer": "^2.7.15",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -39,6 +43,7 @@
     "@types/node": "^20.6.0",
     "@types/passport": "^1.0.13",
     "@types/passport-jwt": "^3.0.10",
+    "@types/pdfkit": "^0.13.2",
     "@types/uuid": "^9.0.4",
     "axios": "^1.6.1",
     "eslint": "^8.49.0",
