@@ -16,6 +16,8 @@ import type { CommercialOfferApiInterface } from '@/modules/api/commercial-offer
 import CommercialOfferApi from '@/modules/api/commercial-offers';
 import type { ContractApiInterface } from '@/modules/api/contracts';
 import ContractApi from '@/modules/api/contracts';
+import type {ProductionReportApiInterface} from "@/modules/api/production-reports";
+import ProductionReportApi from "@/modules/api/production-reports";
 
 // @ts-ignore
 const basePath: string = import.meta.env.VITE_API_BASE_PATH;
@@ -49,6 +51,8 @@ const makeCommercialOfferApi = (): CommercialOfferApiInterface => makeApiInstanc
 
 const makeContractApi = (): ContractApiInterface => makeApiInstance(ContractApi);
 
+const makeProductionReportApi = (): ProductionReportApiInterface => makeApiInstance(ProductionReportApi);
+
 export {
   makeAuthApi,
   makeClientApi,
@@ -58,4 +62,5 @@ export {
   makeServiceRequestApi,
   makeCommercialOfferApi,
   makeContractApi,
+  makeProductionReportApi,
 };

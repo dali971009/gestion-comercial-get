@@ -8,6 +8,7 @@ import serviceTypeRoutes from './service-type-routes';
 import serviceRoutes from './service-routes';
 import commercialOfferRoutes from './commercial-offer-routes';
 import contractRoutes from './contract-routes';
+import productionReportRoutes from './production-report-routes';
 
 const router = express.Router();
 
@@ -43,6 +44,10 @@ const defaultRoutes = [
   {
     path: '/contracts',
     route: contractRoutes,
+  },
+  {
+    path: '/production-report',
+    route: productionReportRoutes,
   },
 ];
 

@@ -155,6 +155,16 @@ const routes: RouteRecordRaw[] = [
         name: RouteNames.PRODUCTION_REPORT_EDIT,
         component: () => import('../../modules/production-reports/ProductionReportDetailsView.vue'),
       },
+      {
+        path: 'production-reports/:id/print',
+        name: RouteNames.PRODUCTION_REPORT_PRINT,
+        component: () => import('../../modules/production-reports/ProductionReportPrintView.vue'),
+      },
+      {
+        path: 'invoices/:id/print',
+        name: RouteNames.INVOICE_PRINT,
+        component: () => import('../../modules/invoices/InvoicePrintView.vue'),
+      },
     ],
   },
 

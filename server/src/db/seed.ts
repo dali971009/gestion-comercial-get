@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import { ClientStatus } from '../config/enums/client-status';
 import { serviceTypeData } from './seeders/service-type-seeder';
 import { serviceRequestData } from './seeders/service-request-seeder';
+import {productionReportData} from "./seeders/production-report-seeder";
 
 const prisma = new PrismaClient();
 
@@ -79,6 +80,10 @@ async function main() {
   for (const data of serviceRequestData(clientIds[0])) {
     const serviceRequest = await prisma.serviceRequest.create({ data });
     console.log(`Created service request with id: ${serviceRequest.id}`);
+  }
+  for (const data of productionReportData()) {
+    const productionReport = await prisma.productionReport.create({ data });
+    console.log(`Created production report with id: ${productionReport.id}`);
   }
 
   console.log(`Seeding finished.`);

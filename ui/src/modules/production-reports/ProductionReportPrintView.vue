@@ -1,11 +1,11 @@
 <template>
   <page-view :use-card="false">
-    <!--<template #actions>
+    <template #actions>
       <v-btn class="text-subtitle-1" style="color: white" @click="generatePDF" rounded>
         <v-icon icon="mdi-printer" class="mr-2" />
         Imprimir
       </v-btn>
-    </template>-->
+    </template>
     <iframe v-if="pdfUrl" :src="pdfUrl" width="100%" height="600"></iframe>
   </page-view>
 </template>
@@ -60,7 +60,6 @@ onMounted(() => {
     backLabel: 'Contratos',
     title: 'Imprimir contrato',
   });
-  generatePDF();
 });
 </script>
 

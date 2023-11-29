@@ -46,7 +46,7 @@ model ClientContact {
 }
 
 model Client {
-  id                 String            @id @default(uuid())
+  id                 String             @id @default(uuid())
   code               String
   officialName       String
   acronym            String?
@@ -68,6 +68,7 @@ model Client {
   serviceRequests    ServiceRequest[]
   commercialOffers   CommercialOffer[]
   contracts          Contract[]
+  productionReportServices  ProductionReportService[]
 }
 
 model ServiceType {
@@ -80,16 +81,17 @@ model ServiceType {
 }
 
 model Service {
-  id                       String                   @id @default(uuid())
-  number                   Int                      @default(autoincrement())
+  id                       String                    @id @default(uuid())
+  number                   Int                       @default(autoincrement())
   typeId                   String
   description              String
   extraDescription         String?
-  type                     ServiceType              @relation(fields: [typeId], references: [id])
+  type                     ServiceType               @relation(fields: [typeId], references: [id])
   unit                     String?
   price                    Decimal?
   frequency                Int?
   commercialOffersServices CommercialOfferService[]
+  productionReportService  ProductionReportService[]
 }
 
 model ServiceRequest {
@@ -150,6 +152,7 @@ model Contract {
   observations             String?
   isPreform                Boolean
   oldVersions              ContractOldVersion[]
+  productionReportServices        ProductionReportService[]
 }
 
 model ContractOldVersion {
@@ -169,4 +172,44 @@ model ContractOldVersion {
   legalOpinion             String?
   agreement                String?
   observations             String?
+}
+
+model ProductionReport {
+  id           String                    @id @default(uuid())
+  area         String
+  month        Int
+  incomePlan   Decimal
+  totalAmount  Decimal
+  services     ProductionReportService[]
+  staff        ProductionReportStaff[]
+}
+
+model ProductionReportStaff {
+  id                 String           @id @default(uuid())
+  productionReportId String
+  productionReport   ProductionReport @relation(references: [id], fields: [productionReportId])
+  fullname           String
+  position           String
+  date               DateTime
+  type               Int
+}
+
+model ProductionReportService {
+  id                 String           @id @default(uuid())
+  number             Int              @default(autoincrement())
+  code         String
+  clientId     String
+  client       Client                    @relation(references: [id], fields: [clientId])
+  contractId   String
+  contract     Contract                  @relation(references: [id], fields: [contractId])
+  serviceId          String
+  service            Service          @relation(references: [id], fields: [serviceId])
+  quantity           Int
+  price              Decimal
+  costCenter   Decimal
+  modalityType Int
+  periodType   Int
+  invoiceNumber       String
+  productionReportId String
+  productionReport   ProductionReport @relation(references: [id], fields: [productionReportId])
 }

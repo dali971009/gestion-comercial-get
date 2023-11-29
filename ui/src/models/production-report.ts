@@ -1,36 +1,48 @@
-import { Client } from './client';
-import { Service } from './service';
+import type { Client } from './client';
+import type { Service } from './service';
+import type { Contract } from './contract';
 
-enum ServiceProvidedModality {
-  EQUAL,
-  PUNCTUAL,
+enum ServiceProvidedModalityType {
+  EQUAL = 1,
+  PUNCTUAL = 2,
+}
+
+enum ServiceProvidedPeriodType {
+  MONTH = 1,
+  QUARTER = 2,
+  SEMESTER = 3,
+  YEAR = 4,
 }
 
 export interface ServiceProvided {
+  id: string;
+  number: number;
+  code: string;
   client: Client;
   service: Service;
-  contractNumber: number;
+  contract: Contract;
   quantity: number;
   amount: number;
   costCenter: number;
-  modality: ServiceProvidedModality;
-  period: string;
-  invoiceNumber: number;
+  modalityType: ServiceProvidedModality;
+  periodType: ServiceProvidedPeriodType;
+  invoiceNumber: string;
 }
 
 export interface PersonInvolved {
+  id: string;
   fullName: string;
   position: string;
   date: Date;
 }
 
 export interface ProductionReport {
-  id: number;
+  id: string;
   area: string;
-  period: string;
+  month: number;
   incomePlan: number;
-  providedServices: ServiceProvided[];
   totalAmount: number;
+  services: ServiceProvided[];
   madeBy: PersonInvolved;
   reconciledWith: PersonInvolved;
   approvedBy: PersonInvolved;

@@ -68,17 +68,12 @@ const items = ref<MenuItem[]>([
     icon: 'mdi-file-document-edit-outline',
     title: 'Contratos',
     routeName: RouteNames.CONTRACT_LIST,
-  } /*
+  },
   {
     icon: 'mdi-file-chart',
     title: 'Reportes de producción',
     routeName: RouteNames.PRODUCTION_REPORT_LIST,
   },
-  {
-    icon: 'mdi-receipt',
-    title: 'Facturas',
-    routeName: RouteNames.INVOICE_LIST,
-  },*/,
   {
     icon: 'mdi-account-group',
     title: 'Usuarios',

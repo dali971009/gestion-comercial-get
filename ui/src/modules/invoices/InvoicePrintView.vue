@@ -18,7 +18,7 @@ import RouteNames from '@/router/route-names';
 import { useRoute, useRouter } from 'vue-router';
 import type { Contract } from '@/models/contract';
 import { ContractType } from '@/models/contract';
-import { makeContractApi } from '@/modules/api/proxy';
+import {makeContractApi, makeProductionReportApi} from '@/modules/api/proxy';
 import { isArray } from 'lodash';
 import { useSnackBar } from '@/stores';
 import { useErrorHandler } from '@/helpers/errors/error-handler';
@@ -28,7 +28,7 @@ const route = useRoute();
 
 const pdfUrl = ref<string>();
 
-const contractId = isArray(route.params.id) ? route.params.id[0] : route.params.id;
+const productionReportId = isArray(route.params.id) ? route.params.id[0] : route.params.id;
 
 const contract = ref<Contract>({
   id: '',
@@ -41,7 +41,7 @@ const snackbarStore = useSnackBar();
 
 async function fetchContract() {
   try {
-    const response = await makeContractApi().getContract({ id: contractId });
+    const response = await makeContractApi().getContract({ id: productionReportId });
     contract.value = response.data;
   } catch (error) {
     console.error(error);
@@ -49,16 +49,16 @@ async function fetchContract() {
 }
 
 async function generatePDF() {
-  const response = await makeContractApi().printContract({ id: contractId });
+  const response = await makeProductionReportApi().printInvoice({ id: productionReportId });
   pdfUrl.value = response.data;
 }
 
 onMounted(() => {
   fetchContract();
   breadcrumb.set({
-    back: { name: RouteNames.CONTRACT_LIST },
-    backLabel: 'Contratos',
-    title: 'Imprimir contrato',
+    back: { name: RouteNames.PRODUCTION_REPORT_LIST },
+    backLabel: 'Reportes de producción',
+    title: 'Imprimir factura',
   });
   generatePDF();
 });
